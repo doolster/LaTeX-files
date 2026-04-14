@@ -1,0 +1,213 @@
+\documentclass{amsart}
+\usepackage{style}
+
+\usepackage[margin = 1.25in]{geometry}
+
+\captionsetup{justification = centering}
+
+\title{TITLE}
+\author{Zack Dooley}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+syntax/semantics for type theory/higher cat. theory, history
+
+Introduce necessary syntax, say something about the choice to not study syntax directly, syntactic category of a tt
+
+\section{Background}
+(different section for homotopy theory vs. semantics?)
+
+(Should I introduce simplicial sets?)
+
+The model of infinity categories that we wish to study is that of a quasicategory.
+\begin{definition}
+    A simplicial set $X$ is called a \textbf{quasicategory} if it satisfies the following lifting property:
+    \[\begin{tikzcd}
+        \Lambda_n^k \arrow[r] \arrow[d] & X\\
+        \Delta_n \arrow[ur, dashed]
+    \end{tikzcd},\]
+    for all $n>0$ and $0<k<n$.
+\end{definition}
+
+To study the homotopical aspects of dependent type theories, we introduce a slightly weakened version of a model category:
+\begin{definition}\cite[Def. 6.6]{KL18}
+    A \textbf{left semi-model structure} on a bicomplete category $\cE$ consists of three classes of maps: $\cW,\cF,\cC$, subject to the axioms:
+    \begin{enumerate}
+        \item all three classes are closed under retracts, $\cW$ satisfies the 2-out-of-3 property,
+        \item fibrations are preserved under pullback,
+        \item cofibrations have the left lifting property with respect to trivial fibrations, and trivial cofibrations with cofibrant source have the left lifting property with respect to fibrations,
+        \item every map can be functorially factored as a cofibration followed by trivial fibration, and every map with a cofibrant source can be functorially factored as a trivial cofibration followed by a fibration.
+    \end{enumerate}
+\end{definition}
+
+In many cases, one typically has slightly more structure:
+\begin{lem}\cite[Lem. 6.7]{KL18}\label{lem:semi-model struct}
+    Suppose $\cE$ is a bicomplete category, equipped with:
+    \begin{enumerate}
+        \item a class of maps $\cW$, including all identities, and closed under 2-out-of-6 and retracts, and
+        \item two weak factorization systems $(\cA,\cF)$ and $(\cC,\cT\cF)$,
+        \item such that $\cT\cF=\cF\cap\cW$, and
+        \item when $A\in\cE$ is cofibrant (i.e. the map $0\to A$ is in $\cC$), then a map $i\colon A\to B$ is in $\cA$ if and only if it is in $\cC\cap\cW$.
+    \end{enumerate}
+    Then the classes $(\cW,\cC,\cF)$ form a left semi-model structure on $\cE$.
+\end{lem}
+
+
+
+
+The models of type theories that we are most interested in is that of contextual categories, as introduced by Cartmell in his thesis \cite{Cartmell}.
+\begin{definition}
+    A \textbf{contextual category} is a category $C$ equipped with:
+    \begin{enumerate}
+        \item A grading on objects: $\Ob C=\coprod_{n\in\N}\Ob_nC$;
+        \item an object $1\in\Ob_0C$;
+        \item father operations: $\ft_n\colon\Ob_{n+1}C\to\Ob_nC$ (whose subscript we suppress);
+        \item for each $\Gamma\in\Ob_{n+1}C$, a map $p_\Gamma\colon\Gamma\to\ft\Gamma$ (the canonical projection from $\Gamma$);
+        \item for each for each $\Gamma\in\Ob_{n+1}C$ and $f\colon\Delta\to\ft\Gamma$, an object $f^*\Gamma$ together with a connecting map $f.\Gamma\colon f^*\Gamma\to\Gamma$;
+    \end{enumerate}
+    such that:
+    \begin{enumerate}
+        \item 1 is terminal in $C$ and the unique object in $\Ob_0C$;
+        \item for each for each $\Gamma\in\Ob_{n+1}C$ and $f\colon\Delta\to\ft\Gamma$, we have $\ft(f^*\Gamma)=\Delta$, and the following square is a pullback,
+        % \[\begin{matrix}\begin{tikzpicture}
+        %     \node (A) at (0,0) {$f^*\Gamma$};
+        %     \node (X) at (2,0) {$\Gamma$};
+        %     \node (B) at (0,-2) {$\Delta$};
+        %     \node (Y) at (2,-2) {$\ft\Gamma$};
+        %     \draw[->] (A) to node[left]{$p_{f^*\Gamma}$} (B);
+        %     \draw[->] (A) to node[above]{$f.\Gamma$} (X);
+        %     \draw[->] (X) to node[right]{$p_\Gamma$} (Y);
+        %     \draw[->] (B) to node[above]{$f$} (Y);
+        % \end{tikzpicture}\end{matrix};\] % How do I get the pb arrow?
+        \[\begin{tikzcd}
+        f^*\Gamma \arrow[r, "f.\Gamma"] \arrow[d, "p_{f^*\Gamma}"'] \arrow[dr, phantom, "\lrcorner", very near start] & \Gamma \arrow[d, "p_\Gamma"] \\
+        \Delta \arrow[r, "f"] & \ft\Gamma
+        \end{tikzcd}\]
+        \item and these canonical pullbacks are strictly functorial, i.e. for $\Gamma\in\Ob_{n+1}C,\id_{\ft\Gamma}^*\Gamma=\Gamma$ and $\id_{\ft\Gamma}.\Gamma=\id_\Gamma$; and for $\Gamma\in\Ob_{n+1}C,f\colon\Delta\to\ft\Gamma$ and $g\colon\Theta\to\Delta$, we have $(fg)^*\Gamma=g^*f^*\Gamma$ and $fg.\Gamma=f.\Gamma\circ g.f^*\Gamma$.
+    \end{enumerate}
+\end{definition}
+
+The structure of a contextual category seeks to axiomatize the structures found in the syntactic category of a dependent type theory. To help translating between the syntax of type theories and the semantics of contextual categories, we identify objects $\Gamma'\in C$ such that $\ft(\Gamma')=\Gamma$ as types in the context $\Gamma$, the set of which we denote $\Ty(\Gamma)$. For a type $A\in\Ty(\Gamma)$, we write $\Gamma.A$ for the corresponding object in our contextual category $C$, and $p_A$ for the projection $p_{\Gamma.A}\colon\Gamma.A\to\Gamma$. Syntactically, we think of this projection map as corresponding to the weakening of the context $\vec x:\Gamma,x:A$ to $\vec x:\Gamma$. We will also extend this notation to contexts, i.e. if $\Gamma'\in C$ such that $\ft^m\Gamma'=\Gamma$ for some $m\in\N$, we will write this object as $\Gamma.\Delta$, where we think of $\Delta$ as a context in context $\Gamma$. This again comes with a canonical projection which we denote $p_\Delta:\Gamma.\Delta\to\Delta$ obtained by composing projection maps.
+
+Given $\Gamma\in C$ and $A\in\Ty(\Gamma)$, the set of terms of type $A$ in context $\Gamma$, denoted $\Tm(A)$, is the set of sections $t\colon\Gamma\to\Gamma.A$ to the projection map $p_A$. To understand why we consider sections of the projection maps to be terms, take $\Gamma=x:A'$, then the projection corresponds to the judgment $x:A',y:A\vdash x:A',$ and a term of $A$ is then given by the judgment $x:A'\vdash t:A$, so this along with the judgment $x:A'\vdash x:A'$, assembles into a context morphism $x:A'$ to $x:A',y:A$, which is a section to the projection map.
+
+One of the benefits of using contextual categories over other potential models, is that we can describe contextual categories as models of an essentially algebraic theory.
+
+\begin{definition}\cite[Def. 3.34]{AR}
+    An \textbf{essentially algebraic theory} is a quadruple
+    $$ \Gamma=(\Sigma,E,\Sigma_t,\Def) $$
+    where $\Sigma$ is a many-sorted signature consisting of operation symbols, $E$ is a set of $\Sigma$-equations, $\Sigma_t\subseteq\Sigma$ is a subset of the operations in $\Sigma$ which are "total", and $\Def$ is a function assigning to each operation $\sigma\in\Sigma\setminus\Sigma_t$ of type $\Pi_{i\in I}s_i\to s$, a set of $\Sigma_t$-equations involving only variables of the sorts $s_i$.
+\end{definition}
+Essentially algebraic theories differ from algebraic theories in that they allow operations to be partially defined. This is necessary, for example, when writing a theory of categories, as the composition operation $\circ\colon\Mor\times\Mor\to \Mor$ is only defined when the source and target of our morphisms match.
+
+\begin{definition}
+    A (set-theoretic) \textbf{model} of an essentially algebraic theory is then an assignment of every sort $s$ to a set $M(s)$, and every operation symbol $\sigma\colon\Pi_{i\in I}s_i\to s$ to a partial function $M(\sigma)\colon\Pi_{i\in I}M(s_i)\to M(s)$ such that
+    \begin{enumerate}
+        \item for each $\sigma\in\Sigma_t$, $M(\sigma)$ is a total function,
+        \item for each $\sigma\in\Sigma\setminus\Sigma_t$, $M(\sigma)$ is defined exactly when the equations of $\Def(\sigma)$ are satisfied, and
+        \item all the equations in $E$ are satisfied.
+    \end{enumerate}
+\end{definition}
+
+In \cite{Cartmell}, Cartmell shows that contextual categories are models of a generalized algebraic theory (a slight modification on essentially algebraic theories with the same expressive power), which provides us with a number of useful tools for working with contextual categories, and so, indirectly with the syntax. For instance, the notion of models given provides us with a natural notion of morphism i.e. functions which preserve all of the operations. In the case of contextual categories we call these morphism \textbf{contextual functors}, and these allow us to construct the category of contextual categories, $\CxlCat$, which, as a category of models of an essentially algebraic theory, must be complete and cocomplete (as a corollary to \cite[Thm. 3.36]{AR}).
+
+We wish to additionally equip our contextual categories with structures corresponding to the various forms of type constructors that appear in Martin-L\"of type theory. These include:
+\begin{enumerate}
+    \item Identity types (denoted $\Id$);
+    \item unit types (1);
+    \item dependent sum or Sigma types ($\Sigma$);
+    \item dependent function of Pi types, with function extensionality ($\Pi_{\ext}$).
+\end{enumerate}
+The most relevant of these structures to this paper is the $\Id$-type structure.
+\begin{definition}
+    An \textbf{$\Id$-type structure} on a contextual category $C$ consists of:
+    \begin{enumerate}
+        \item for each $\Gamma.A$, an object $\Gamma.A.p_A^*A.\Id_A$,
+        \item for each $\Gamma.A$, a section $\refl_A\colon\Gamma.A\to\Gamma.A.p_A^*A.\Id_A$,
+        \item for each $\Gamma.A.p_A^*A.\Id_A.C$ and $d\colon\Gamma.A\to\Gamma.A.p_A^*A.\Id_A.C$ with $p_C\circ d=\refl_A$, \newline
+        a section $J_{C,d}\colon\Gamma.A.p_A^*A.\Id_A\to\Gamma.A.p_A^*A.\Id_A.C$, such that $J_{C,d}\circ\refl_A=d$,
+        \item such that for $f\colon\Gamma'\to\Gamma$, and all appropriate arguments above,
+        $$ f^*(\Gamma.A.p_A^*A.\Id_A)=\Gamma'.f^*A.(p_{f^*A})^*(f^*A).\Id_{f^*A}, $$
+        $$ f^*\refl_A=\refl_{f^*A},\qquad f^*J_{C,d}=J_{f^*C,f^*d}. $$
+    \end{enumerate}
+\end{definition}
+The first three rules of this type structure are meant to mimic the syntactic rules for identity types in our type theory, and the last rule ensures that this structure respects substitution. Similar definitions for unit, Sigma, and Pi type structures can be found in \cite[Appendix B]{KL21}.
+
+Each of these structures extend the essentially algebraic theory of contextual categories and thus also have a natural notion of morphism, preserving the corresponding structures. We denote the category of contextual categories with identity, unit, Sigma, and extensional Pi type structures by $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
+
+Following \cite[Prop. 3.3.1]{Garner}, we can extend the notion of $\Id$-type structures to \textbf{identity contexts}. Specifically, given $\Gamma\in C$ and a context extension $\Gamma.\Delta\in C$, we can further construct a context extension $\Gamma.\Delta.p_\Delta^*\Delta.\Id_\Delta$ which comes equipped with reflexivity map and an elimination term which directly generalize those of the $\Id$-type structure on a single type. This is essentially a notational issue which helps use define a notion of homotopies within our contextual categories.
+
+\begin{definition}
+    Given maps $f,g:\Gamma\to\Delta$ in a contextual category $C$, a \textbf{homotopy} $H$ from $f$ to $g$, denoted $H\colon f\sim g$, is a factorization of the map $(f,g)\colon\Gamma\to\Delta\times\Delta:=\Delta.p_\Delta^*\Delta$ through the identity context $\Delta.p_\Delta^*\Delta.\Id_\Delta\to\Delta.p^*_\Delta\Delta$.
+\end{definition}
+
+With this we can define a notion of equivalence within a contextual category to match the syntactic notion of equivalence (or one of such equivalent notions \cite[Ch. 4]{hottbook}.
+
+\begin{definition}
+    Let $C$ be a contextual category with identity types.
+    
+    A \textbf{structured equivalence} $w:\Gamma\simeq\Delta$ consists of a map $f\colon\Gamma\to\Delta$, along with maps $g_1,g_2\colon\Delta\to\Gamma$ and homotopies $\eta\colon fg_1\sim1_\Delta$ and $\varepsilon\colon g_2f\sim1_\Gamma$.
+    
+    An \textbf{equivalence} $\Gamma\xrightarrow{\sim}\Delta$ in $C$ is a map $f\colon\Gamma\Delta$ for which there exists some $g_1,g_2,\eta,\varepsilon$ making it a structured equivalence.
+\end{definition}
+
+With this definition of equivalence we can see that contextual categories have an underlying category with weak equivalences (which is in fact even a fibration category \cite[Thm. 3.2.5]{AKL}). Identifying this underlying structure is the first crucial step in studying the homotopical semantics of our type theories.
+
+Our description of contextual categories as models of an essentially algebraic theory additionally provide us with the important ability to define contextual categories by generators and relations, and in particular lets us define freely generated contextual categories.
+
+\begin{definition}
+    We define the following freely generated objects in $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$:
+    \begin{enumerate}
+        \item $\gen{\Gamma_n}$ is freely generated by a context of length $n$.
+        \item $\gen{\Gamma_n\vdash A}$ is freely generated by a context $\Gamma$ of length $n$, and a type $A$ in context $\Gamma$.
+        \item $\gen{\Gamma_n\vdash a:A}$ is freely generated by a context $\Gamma$, and a type $A$ and a term $a:A$ in context $\Gamma$, i.e. a section of $p_A$.
+        \item $\gen{\Gamma_n\vdash A\simeq A'}$ is freely generated by a context $\Gamma$, types $A,A'$ in context $\Gamma$, and maps $f,g_l,g_r,\alpha_l,\alpha_r$ constituting an equivalence from $A$ to $A'$ over $\Gamma$.
+        \item $\gen{\Gamma_n\vdash e:\Id_A(a,a')}$ is freely generated by $\Gamma$ and $A$, as in $\gen{\Gamma_n\vdash A}$, and a section to the projecting map $\Gamma.A.(p_A)^*A.\Id_A\to\Gamma.A$, giving the three terms $a,a'$, and $e$.
+    \end{enumerate}
+\end{definition}
+Note that our use of the phase "freely generated" is perhaps a bit misleading, as these are not all freely generated objects of the theory of contextual categories. Since terms of the theory correspond to sections, these objects must involve some relations. Calling these objects "freely generated" emphasizes their role in relation to their corresponding syntactic objects.
+
+With this we can define the classes of maps that will make up the left semi-model structure on $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$, which will provide us with a homotopical interpretation in service of constructing a semantics.
+\begin{definition}
+    A map $F\colon C\to D$ of contextual categories with $\Id$-types is a \textbf{type-theoretic equivalence} if it satisfies:
+    \begin{enumerate}
+        \item \textbf{weak type lifting}: for any $\Gamma\in C$ and any type $A\in\Ty(F\Gamma)$, there exists a type $\bar{A}\in\Ty(\Gamma)$ along with an equivalence $F\bar{A}\simeq A$ over $F\Gamma$, and
+        \item \textbf{weak term lifting}: for any $\Gamma\in C$, $A\in\Ty(\Gamma)$, and $a\in\Tm(FA)$, there exists a term $\bar{a}\in\Tm(A)$ along with an identity $e\in\Tm(\Id_{FA}(F\bar{a},a)$.
+    \end{enumerate}
+\end{definition}
+These will make up the class $\cW$ of our left semi-model structure. The remaining classes will be cofibrantly generated from the following sets of maps.
+\begin{definition}
+    Take $I$ and $J$ to be the following sets of maps:
+    \begin{enumerate}
+        \item $I$ consists of the inclusions $\gen{\Gamma_n}\to\gen{\Gamma_n\vdash A}$ and $\gen{\Gamma_n\vdash A}\to\gen{\Gamma_n\vdash a:A}$, for all $n\in\N$, and
+        \item $J$ consists of the inclusions $\gen{\Gamma_n\vdash A}\to\gen{\Gamma_n\vdash A\simeq A'}$ and $\gen{\Gamma_n\vdash a:A}\to\gen{\Gamma_n\vdash e:\Id_A(a,a')}$, for all $n\in\N$.
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    We now define the \textbf{trivial fibrations}, $\cT\cF$, as the right lifting class of $I$, the \textbf{cofibrations}, $\cC$, as the left lifting class of $\cT\cF$, the \textbf{fibrations}, $\cF$, as the right lifting class of $J$, and the \textbf{anodyne maps}, $\cA$, as the left lifting class of $\cF$.
+\end{definition}
+
+By the small object argument (ref?), we get:
+\begin{prop}
+    $(\cC,\cT\cF)$ and $(\cA,\cF)$ are both weak factorization systems.
+\end{prop}
+
+Unfolding the lifting properties of $\cT\cF$, we can see that a map $F\colon C\to D$ is a trivial fibration exactly if it strictly lifts types and terms, i.e. for any $\Gamma\in C$ and $C\in\Ty(F\Gamma)$, there is some term $\bar{A}\in\Ty(\Gamma)$ such that $F\bar{A}=A$, and similarly for terms. Since strict type and term lifting immediately implies their corresponding weak version, we get that trivial fibrations must be weak equivalences. Similarly, the lifting properties for fibrations can be seen as equivalence and equality lifting. We immediately get that every object is fibrant, since the generating anodyne maps have retracts given by the identity equivalence and reflexivity, respectively.
+
+It follows from the construction that a typical cofibration of contextual categories is an $I$-cell complex, i.e. it consists of freely adding types and terms to a theory without any judgmental equalities. Cofibrant contextual categories are then type theories which are freely generated (over the constructors $\Id,1,\Sigma,\Pi_{\ext}$) by a set of type and term formation rules with no (non-trivial) judgmental equalities. The anodyne maps, in turn, consist of freely adjoining types and terms to a theory along with equivalences and identities to a preexisting type or term.
+
+These classes of maps satisfy the hypotheses of \ref{lem:semi-model struct}, providing us with homotopical structure on the category of contextual categories.
+
+\begin{theorem}\cite[Thm. 6.9]{KL18}
+    The classes $\cW,\cC,\cF$ above form a left semi-model structure on the category $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
+\end{theorem}
+
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

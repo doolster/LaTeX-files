@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{style}
+\usepackage{tabularx}
+
+\usepackage[margin = 1.25in]{geometry}
+
+\captionsetup{justification = centering}
+
+\title{Candidacy Presentation Notes}
+\author{Zack Dooley}
+\date{}
+
+\begin{document}
+\maketitle
+Syntax - Formal specification of a theory ---- Semantics - Interpretation of a theory in a model
+We have a theory of groups - set G, with binary operation $\circ$, satisfying...
+
+This theory can be modeled within $\Z$ w/ addition (externally defined object which satisfies the rules of the theory)
+
+
+\newpage
+\begin{tabularx}{\columnwidth}{X|X}
+    Syntax - Formal specification of a theory & Semantics - Interpretation of a theory in a model\\
+    \hline
+    A Group is a set with binary operation that is unital, associative, has inverses & $\Z$ with addition (this is ONE model, in particular $\Z$ comm. but that is not true of all groups)\\
+    (Classical) Prop. Logic: Props. P, Q, etc. $\vee,\wedge,\implies,\neg$, rules about how to use these symbols to create formulas & Truth tables (lets us evaluate formula without constructing a proof)\\
+    Dependent type theory (w/ ext. Id) (a class of theories) & LCCC (Clairambault, Dybjer 2011)\\
+    Dependent type theory w/ $\Id,1,\Sigma,\Pi_{\ext}$ & $\text{LCCC}_\infty$
+\end{tabularx}
+
+Part 1 Syntax:
+\begin{itemize}
+    \item What is a dependent type theory? A system of rules for deriving valid formula
+    \item These rules occur in four judgment forms:
+    $$ \Gamma\vdash A\text{ Type},\quad\Gamma\vdash A\equiv B\text{ Type},\quad\Gamma\vdash a:A,\quad\Gamma\vdash a\equiv b:A $$
+    (Note distinction between types/terms, terms live in unique types $0:\Z$ not the same as $0:\N$)
+    \item Contexts are finite lists of types $\Gamma=(x_1:A_1,\dots,x_n:A_n)$
+    \item We call this dependent type theory, because the types/terms can depend on previously occurring variables
+    \item Ex: $n:\N\vdash\text{Vec}(n)\text{ Type}$ $n:\N\vdash[]:\text{Vec}(n)$ (Vec(n) is a family of types dependent on $\N$)
+    \item (Example of derivation in type theory - variable change rule?)
+    \item (there are a set of basic rules which I am ignoring, they're "expected" rules about the basic functionality of the theory)
+    \item We add more structures to our theory to reason about more things: 1 (unit type - type with unique term), $\Sigma$ (Sigma/dependent pair type) $(a,b):\Sigma_{x:A}B(x)$ corresponds to $a:A$ and $b:B(a)$, $\Pi$ (Pi/dependent function type) $f:\Pi_{x:A}B(x)$ evaluates to $f(a):B(a)$, Id (identity/path type - not the same as judgmental eq.) if $a,a':A$, then we have a type $\Id_A(a,a')$ (type of paths/equalities between $a$ and $a'$, equalities are not unique, leads to higher structures)
+\end{itemize}
+
+Part 2 Semantics:
+\begin{itemize}
+    \item Simplicial sets?
+    \item There are many different models for the "intuitive" notion of an infinity category, the one we're interested in is that of a quasi-category
+    \item \begin{definition}
+        A quasi-category is a simplicial set $X$, which satisfies the following lifting property,
+        \[\begin{tikzcd}
+            \Lambda_n^k \arrow[r] \arrow[d] & X\\
+            \Delta_n \arrow[ur, dashed]
+        \end{tikzcd},\]
+        for all $n\in\N$ and $0<k<n$. (Example with $\Lambda^1_2\to\Delta_2$ - how this gives us composition)
+    \end{definition}
+    \item This is an $(\infty,1)$-category i.e. Higher cells are invertible
+    \item uniqueness -> contractibility
+    \item Basically any categorical construction can be replicated with higher categories, over categories, terminal object, limits
+\end{itemize}
+
+Part 1+2 Conjecture:
+
+
+\end{document}

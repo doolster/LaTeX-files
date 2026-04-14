@@ -1,0 +1,313 @@
+% -------------------
+% Tikz & PGF
+% -------------------
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{
+    arrows,
+	% calc,
+	% decorations.pathmorphing,
+	% hobby,
+	% matrix,arrows,
+	positioning,
+	% shapes.geometric,
+	decorations.markings,
+	arrows.meta,
+}
+
+\newcommand{\TikZ}[1]{
+\begin{matrix}\begin{tikzpicture}#1\end{tikzpicture}\end{matrix}
+}
+
+
+% -------------------
+% Packages
+% -------------------
+
+\usepackage{
+	amsmath,			% Math Environments
+	amssymb,			% Math Symbols
+	amsthm,			    % Theorem Environments
+    array,              % Array and tabular options
+    bbold,              % Blackboard bold symbols font
+	% bookmark,        	% Replaces (and loads) hyperref
+    bussproofs,         % Natural deduction style proof trees
+	caption, 			% Caption tables in float
+	% calligra,			% Calligraphic
+	% chngcntr,			% Use counterwithin
+	% cleveref,			% Use clever references
+	comment,			% Multiline comments
+	% ctable,			% for \specialrule command
+    dsfont,             % Blackboard bold font
+	enumerate,		    % Enumerate Environments
+	% enumitem,			% Labeling of enum
+	% extpfeil,			% Extensible arrows in mathematics
+	% fancyhdr,			% Better Headers
+	float,				% Force Image Placement
+	% framed,			% Pretty (shaded) theorems
+	graphicx,           % Graphics
+	hyperref,           % Hypertext
+    mathdots,           % More dots characters
+    % mathpazo,         % More fonts
+    % mathrsfs,         % More Math Scripts
+	mathtools,       	% Allows Prescript
+	mdframed,			% Blockquote environment
+	% microtype,       	% Improved Appearance
+	% multicol,			% Use Multi-columns
+	% multirow,			% Use Multi-rows
+	% nicefrac,			% Alternative Fractions
+	% parskip,			% Paragraph space
+	% pstricks,pst-node,pst-tree,  % Graphics
+	pgfplots,           % Plots
+	% relsize,			% Bigger Math Symbols
+    stix,               % Fonts
+	% stmaryrd,			% More symbols
+    thmtools,           % Custom Theorem Environments
+    % tipa,             % IPA fonts and characters
+    % titlesec,			% Set (sub)section formatting
+    % tkz-graph,		% For graphs (vertices and edges)
+	thm-restate,		% For Re-stateable Theorems
+	% totcount,			% Define counters
+	tcolorbox,			% Use tcolorbox
+    tikz-cd,
+	witharrows,			% Arrow transitions
+	xcolor,			    % Define Colors
+	xfrac,              % Fraction options
+	% ytableau,			% Young diagrams
+}
+
+\pgfplotsset{compat=1.18}
+
+%\setlength\parindent{0pt}
+\hypersetup{
+    colorlinks=true,
+    allcolors=black
+    % linkcolor=blue!50!black,
+    % filecolor=blue!50!black,    
+    % citecolor=blue!50!black,  
+    % urlcolor=blue!50!black,
+    }
+
+
+% -------------------
+% Theorem Environments
+% -------------------
+
+\numberwithin{equation}{section} %section became chapter
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}[section] %section became chapter
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{por}[thm]{Porism}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{notn}[thm]{Notation}
+% \newtheorem*{rem}{Remark}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{exe}[thm]{Exercise}
+\newtheorem{obs}[thm]{Observation}
+\newtheorem{ques}[thm]{Question}
+
+\newenvironment{ans}{\begin{proof}[Answer]}{\end{proof}}
+\newenvironment{sketch}{\begin{proof}[Sketch]}{\end{proof}}
+
+
+% -------------------
+% Commands
+% -------------------
+
+% Special Characters
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\R{\mathbb{R}}
+\def\F{\mathbb{F}}
+\def\C{\mathbb{C}}
+\def\T{\mathbb{T}}
+\def\bS{\mathds{S}}
+\def\RP{\mathbb{R}\text{P}}
+
+\def\cA{\mathcal{A}}\def\cB{\mathcal{B}}\def\cC{\mathcal{C}}\def\cD{\mathcal{D}}\def\cE{\mathcal{E}}\def\cF{\mathcal{F}}\def\cG{\mathcal{G}}\def\cH{\mathcal{H}}\def\cI{\mathcal{I}}\def\cJ{\mathcal{J}}\def\cK{\mathcal{K}}\def\cL{\mathcal{L}}\def\cM{\mathcal{M}}\def\cN{\mathcal{N}}\def\cO{\mathcal{O}}\def\cP{\mathcal{P}}\def\cQ{\mathcal{Q}}\def\cR{\mathcal{R}}\def\cS{\mathcal{S}}\def\cT{\mathcal{T}}\def\cU{\mathcal{U}}\def\cV{\mathcal{V}}\def\cW{\mathcal{W}}\def\cX{\mathcal{X}}\def\cY{\mathcal{Y}}\def\cZ{\mathcal{Z}}
+
+% Categories
+\newcommand{\Set}{\operatorname{\mathbf{Set}}}
+\newcommand{\sSet}{\operatorname{\mathbf{sSet}}}
+\newcommand{\FinSet}{\operatorname{\mathbf{FinSet}}}
+\newcommand{\Mon}{\operatorname{\mathbf{Mon}}}
+\newcommand{\Grp}{\operatorname{\mathbf{Grp}}}
+\newcommand{\Ring}{\operatorname{\mathbf{Ring}}}
+\newcommand{\Ab}{\operatorname{\mathbf{Ab}}}
+\newcommand{\Alg}{\operatorname{\mathbf{-Alg}}}
+\newcommand{\Vect}{\operatorname{\mathbf{-Vect}}}
+\newcommand{\FinVect}{\operatorname{\mathbf{FinVect}}}
+\newcommand{\Mod}{\operatorname{\mathbf{-Mod}}}
+\newcommand{\Top}{\operatorname{\mathbf{Top}}}
+\newcommand{\Man}{\operatorname{\mathbf{Man}}}
+\newcommand{\Cat}{\operatorname{\mathbf{Cat}}}
+\newcommand{\nCat}{\operatorname{\mathbf{nCat}}}
+\newcommand{\Grpd}{\operatorname{\mathbf{Grpd}}}
+\newcommand{\Kan}{\operatorname{\mathbf{Kan}}}
+\newcommand{\Ch}{\operatorname{\mathbf{Ch}}}
+\newcommand{\Sp}{\operatorname{\mathbf{Sp}}}
+\newcommand{\CxlCat}{\operatorname{\mathbf{CxlCat}}}
+
+% Math Operators
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\Max}{Max}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\type}{type}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\pre}{pre}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\germ}{germ}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\cyl}{cyl}
+\DeclareMathOperator{\Presheaves}{Presheaves}
+\DeclareMathOperator{\Sheaves}{Sheaves}
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator{\exx}{ex}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\htt}{ht}
+\DeclareMathOperator{\chr}{char}
+\DeclareMathOperator{\Ass}{Ass}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Des}{Des}
+\DeclareMathOperator{\Fib}{Fib}
+\DeclareMathOperator{\Sh}{Sh}
+\DeclareMathOperator{\grp}{grp}
+\renewcommand{\Re}{{\rm Re}}
+\renewcommand{\Im}{{\rm Im}}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\bbm}{\begin{bmatrix}}
+\newcommand{\ebm}{\end{bmatrix}}
+\newcommand{\normal}{\unlhd}
+\newcommand{\Orb}{\operatorname{Orb}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\acts}{~\rotatebox[origin=c]{-90}{$\circlearrowright$}~}
+\newcommand{\pprod}{\widehat{\otimes}}
+\newcommand{\Path}{\operatorname{Path}}
+\newcommand{\Ho}{\operatorname{Ho}}
+\newcommand{\iso}{\operatorname{iso}}
+\newcommand{\const}{\operatorname{const}}
+\newcommand{\fib}{\operatorname{fib}}
+\newcommand{\Sk}{\operatorname{Sk}}
+\newcommand{\Ex}{\operatorname{Ex}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Sd}{\operatorname{Sd}}
+\newcommand{\rel}{\operatorname{rel}}
+\newcommand{\Sing}{\operatorname{Sing}}
+\newcommand{\cell}{\operatorname{cell}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\ft}{\operatorname{ft}}
+\newcommand{\ext}{\operatorname{ext}}
+\newcommand{\Def}{\operatorname{Def}}
+\newcommand{\Ty}{\operatorname{Ty}}
+\newcommand{\Tm}{\operatorname{Tm}}
+
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\refl}{\operatorname{refl}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\ap}{\operatorname{ap}}
+\newcommand{\pair}{\operatorname{pair}}
+\newcommand{\app}{\operatorname{app}}
+\newcommand{\Ssplit}{\operatorname{split}}
+
+\DeclarePairedDelimiter{\gen}{\langle}{\rangle}
+
+
+% Special Commands
+\newcommand{\xqed}{\hfill \lower-0.3ex\hbox{$\triangleleft$}}
+% \newcommand{\ov}[1]{\overline{#1}}
+% \newcommand*{\defeq}{\stackrel{\text{def}}{=}}
+\newcommand{\col}[2]{\begin{bmatrix} #1 \\ #2 \end{bmatrix}}
+\newcommand{\two}[4]{\begin{bmatrix} #1 & #2 \\ #3 & #4 \end{bmatrix}}
+\newcommand{\andd}{\quad\text{and}\quad}
+\newcommand{\md}[1]{{\left\lvert #1 \right\lvert}}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\fl}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\inm}{\in_m}
+\newcommand{\deff}[1]{{\color{blue}#1}}
+\newcommand{\dcos}[3]{#1 \reflectbox{\ensuremath{/}} #2 / #3}
+\newcommand*{\I}{\hat{\imath}}
+\newcommand*{\J}{\hat{\jmath}}
+\newcommand*{\K}{\hat{k}}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\forward}{($\Rightarrow$)\ }
+\newcommand{\backward}{($\Leftarrow$)\ }
+\renewcommand{\pmod}[1]{\ (\operatorname{mod} #1)}
+% \newextarrow{\xbigtoto}{{20}{20}{20}{20}}
+%    {\bigRelbar\bigRelbar{\bigtwoarrowsleft\rightarrow\rightarrow}}
+\newcommand{\ls}[2]{{}_{#2}#1}
+\newcommand{\mynameref}[1]{\nameref{#1} \ref{#1}}
+\let\emptyset\varnothing
+\let\subset\subseteq
+\let\supset\supseteq
+\let\ge\geqslant
+\let\le\leqslant
+
+% \newcommand{\ZAJJ}[1]{{\color{blue}\emph{From Zajj:} #1}}
+
+%for theorems
+\declaretheorem[name=Proposition]{proposition}
+\declaretheorem[name=Assumption]{assumption}
+\declaretheorem[name=Definition]{definition}
+\declaretheorem[name=Lemma]{lemma}
+\declaretheorem[name=Theorem]{theorem}
+\declaretheorem[name=Corollary]{corollary}
+\usepackage{soul}
+
+% TikZ
+\usepgflibrary{arrows.meta}
+\usetikzlibrary{decorations.pathmorphing}
+\tikzstyle{V}=[draw, fill =black, circle, inner sep=0pt, minimum size=2.5pt]
+\tikzstyle{D}=[draw, fill =black, circle, inner sep=0pt, minimum size=2pt, outer sep=4pt]
+\tikzstyle{bV}=[draw, fill =black, circle, inner sep=0pt, minimum size=4pt, outer sep=2pt]
+
+\newcommand\TRI[3]{
+\begin{tikzpicture}[scale=.5]
+	\coordinate (1) at (90:1cm);
+	\coordinate (2) at (210:1cm);
+	\coordinate (3) at (-30:1cm);
+	\draw (1) to (2) to (3) to (1);
+	\node[] at (90:1.3cm) {\scriptsize$#1$};
+	\node[] at (210:1.3cm) {\scriptsize$#2$};
+	\node[] at (-30:1.3cm) {\scriptsize$#3$};
+\end{tikzpicture}}
+
+ \def\becomes{
+ \begin{matrix}\begin{tikzpicture}[scale=0.8]
+ 	\draw [->,thick, decorate, decoration={segment length=2.5mm, snake, amplitude=.5mm, post length=1mm}] (0,0) -- (1,0);
+ \end{tikzpicture}\end{matrix}
+ }

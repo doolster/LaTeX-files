@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{AR}
+Jiř\'i Ad\'amek and Jiř\'i Rosick\'y.
+\newblock {\em Locally Presentable and Accessible Categories}.
+\newblock Cambridge University Press, 1994.
+
+\bibitem{AKL}
+Jeremy Avigad, Krzysztof Kapulkin, and Peter~Lefanu Lumsdaine.
+\newblock Homotopy limits in type theory.
+\newblock {\em Mathematical Structures in Computer Science}, 25(5):1040–1070, 2015.
+
+\bibitem{Cartmell}
+John Cartmell.
+\newblock {\em Generalized Algebraic Thoeries and Contextual Categories}.
+\newblock PhD thesis, Oxford, 1978.
+
+\bibitem{Garner}
+Richard Garner.
+\newblock Two-dimensional models of type theory.
+\newblock {\em Math. Structures in Computer Sci.}, 2009.
+
+\bibitem{KL18}
+Krzysztof Kapulkin and Peter~LeFanu Lumsdaine.
+\newblock The homotopy theory of type theories.
+\newblock {\em Advances in Mathematics}, 337:1--38, 2018.
+
+\bibitem{KL21}
+Krzysztof Kapulkin and Peter~LeFanu Lumsdaine.
+\newblock The simplicial model of univalent foundations (after voevodsky).
+\newblock {\em Journal of the European Mathematical Society}, 23(6):2071–2126, March 2021.
+
+\bibitem{hottbook}
+The {Univalent Foundations Program}.
+\newblock {\em Homotopy Type Theory: Univalent Foundations of Mathematics}.
+\newblock \url{https://homotopytypetheory.org/book}, Institute for Advanced Study, 2013.
+
+\end{thebibliography}
