@@ -32,6 +32,14 @@ The model of infinity categories that we wish to study is that of a quasicategor
     for all $n>0$ and $0<k<n$.
 \end{definition}
 
+We denote the full subcatefory of $\sSet$ spanned by quasicategories by $\qCat$. We write $\tau_1\colon\sSet\to\Cat$ for the adjoint to the nerve functor, and we let $\qCat_2$ denote the 2-category of quasicategories, where the hom-categories are given by $\qCat_2(C,D):=\tau_1(D^C)$.
+
+At the core of the realtionship between type theories and categories is the notion that the type formers on theory should correspond to imposing more categorical structure on the semantic side. In the case that we are interested in, the categorical structure that we expect is that of a locally Cartesian closed infinty category, a notion analogous to that of a locally Cartesian closed category, but requires some setup for our particular choice of model.
+
+
+
+
+
 To study the homotopical aspects of dependent type theories, we introduce a slightly weakened version of a model category:
 \begin{definition}\cite[Def. 6.6]{KL18}
     A \textbf{left semi-model structure} on a bicomplete category $\cE$ consists of three classes of maps: $\cW,\cF,\cC$, subject to the axioms:
