@@ -32,13 +32,48 @@ The model of infinity categories that we wish to study is that of a quasicategor
     for all $n>0$ and $0<k<n$.
 \end{definition}
 
-We denote the full subcatefory of $\sSet$ spanned by quasicategories by $\qCat$. We write $\tau_1\colon\sSet\to\Cat$ for the adjoint to the nerve functor, and we let $\qCat_2$ denote the 2-category of quasicategories, where the hom-categories are given by $\qCat_2(C,D):=\tau_1(D^C)$.
+We denote the full subcategory of $\sSet$ spanned by quasicategories by $\qCat$. We write $\tau_1\colon\sSet\to\Cat$ for the adjoint to the nerve functor, and we let $\qCat_2$ denote the 2-category of quasicategories, where the hom-categories are given by $\qCat_2(C,D):=\tau_1(D^C)$.
 
-At the core of the realtionship between type theories and categories is the notion that the type formers on theory should correspond to imposing more categorical structure on the semantic side. In the case that we are interested in, the categorical structure that we expect is that of a locally Cartesian closed infinty category, a notion analogous to that of a locally Cartesian closed category, but requires some setup for our particular choice of model.
+At the core of the relationship between type theories and categories is the notion that the type formers on theory should correspond to imposing more categorical structure on the semantic side. In the case that we are interested in, the categorical structure that we expect is that of a locally Cartesian closed infinity category, a notion analogous to that of a locally Cartesian closed category, but requires some setup for our particular choice of model.
+
+We define the \textbf{join} of simplicial sets as the unique functor $\star\colon\sSet\times\sSet\to\sSet$ with natural transformations \(K\to K\star L\leftarrow L\) such that $\Delta_m\star\Delta_n\cong\Delta_{m+n+1}$, naturally in both $m$ and $n$, and both functors $-\star L\colon\sSet\to L\downarrow\sSet$ and $K\star-\colon\sSet\to K\downarrow\sSet$ preserves colimits. By the adjoint functor theorem, $-\star L$ admits a right adjoint which takes a map of simplicial sets $X\to K$ to the simplicial set $K\downarrow$ defined by:
+\[(K\downarrow X)_n=\{Y\colon\Delta_n\star L\to K\ |\ Y|_L=X\}.\]
+Instantiating this definition with a 0-simplex $x\colon\Delta_0\to C$, we obtain a notion of a \textbf{slice quasicategory}
+\[(C\downarrow x)_n=\{X\colon\Delta_{n+1}\to C\ |\ X_{\Delta^{n+1}}=x\}.\]
+Since the canonical map $C\downarrow x\to C$ lifts against inner horn inclusions, we get that $C\downarrow x$ is a quasicategory.
+
+With this we can define limits in a quasicategory. For notational convenience, we will write $K^\lhd$ for $\Delta_0\star K$.
+
+\begin{definition}
+    Let $C$ be a quasicategory and $X\colon K\to C$ a map of simplicial sets.
+    \begin{enumerate}
+        \item A \textbf{cone} over $X$ is a simplicial map $Y\colon K^\lhd\to C$ such that $Y|_K=X$.
+        \item A cone $\tilde{X}\colon K^\lhd\to C$ is \textbf{universal} (or a \textbf{limit}) if for all $n>0$ and all $Z:\partial\Delta_n\star K\to C$ such that $Z|_{\Delta^{\{n\}}}\star K=\tilde{X}$, there exists a lift,
+        \[\begin{tikzcd}
+            \partial\Delta_n\star K \arrow[r, "Z"] \arrow[d, hook] & C\\
+            \Delta_n\star K \arrow[ur, dashed]
+        \end{tikzcd}.\]
+    \end{enumerate}
+\end{definition}
+
+\begin{ex}
+    \begin{enumerate}
+        \item A \textbf{terminal object} in quasicategory $C$ is a limit of $\emptyset\to C$.
+        \item A \textbf{pullback} in a quasicategory $C$ is a limit of a diagram $\Lambda_2^2\to C$.
+    \end{enumerate}
+\end{ex}
+
+All of these notions straightforwardly dualize to coslice categories, colimits, etc. The last definition that we need is a notion of adjoints of quasicategories.
+\begin{definition}
+    Let $F\colon C\rightleftarrows D\colon G$ be simplicial maps between quasicategories and let $\eta\colon C\times\Delta_1\to C$ be such that $\eta|_{C\times\partial\Delta_1}=[1_C,GF]$ and $\varepsilon\colon D\times\Delta_1\to D$ such that $\varepsilon|_{D\times\partial\Delta_1}=[FG,1_D]$. The quadruple $(F,G,\eta,\varepsilon)$ is an \textbf{adjunction of quasicategories} if $(F,G,\eta,\varepsilon)$ is an adjunction in the 2-category $\qCat_2$.
+\end{definition}
 
 
 
-
+With this we can finally define what it means for a quasicategory to be locally Cartesian closed.
+\begin{definition}
+    A quasicategory $C$ is \textbf{locally Cartesian closed} if it has finite limits and for any 1-simplex $f\colon x\to y$, the pullback functor $f^*\colon C\downarrow y\to C\downarrow x$ has a right adjoint.
+\end{definition}
 
 To study the homotopical aspects of dependent type theories, we introduce a slightly weakened version of a model category:
 \begin{definition}\cite[Def. 6.6]{KL18}
@@ -80,16 +115,6 @@ The models of type theories that we are most interested in is that of contextual
     \begin{enumerate}
         \item 1 is terminal in $C$ and the unique object in $\Ob_0C$;
         \item for each for each $\Gamma\in\Ob_{n+1}C$ and $f\colon\Delta\to\ft\Gamma$, we have $\ft(f^*\Gamma)=\Delta$, and the following square is a pullback,
-        % \[\begin{matrix}\begin{tikzpicture}
-        %     \node (A) at (0,0) {$f^*\Gamma$};
-        %     \node (X) at (2,0) {$\Gamma$};
-        %     \node (B) at (0,-2) {$\Delta$};
-        %     \node (Y) at (2,-2) {$\ft\Gamma$};
-        %     \draw[->] (A) to node[left]{$p_{f^*\Gamma}$} (B);
-        %     \draw[->] (A) to node[above]{$f.\Gamma$} (X);
-        %     \draw[->] (X) to node[right]{$p_\Gamma$} (Y);
-        %     \draw[->] (B) to node[above]{$f$} (Y);
-        % \end{tikzpicture}\end{matrix};\] % How do I get the pb arrow?
         \[\begin{tikzcd}
         f^*\Gamma \arrow[r, "f.\Gamma"] \arrow[d, "p_{f^*\Gamma}"'] \arrow[dr, phantom, "\lrcorner", very near start] & \Gamma \arrow[d, "p_\Gamma"] \\
         \Delta \arrow[r, "f"] & \ft\Gamma
@@ -212,6 +237,8 @@ These classes of maps satisfy the hypotheses of \ref{lem:semi-model struct}, pro
 \begin{theorem}\cite[Thm. 6.9]{KL18}
     The classes $\cW,\cC,\cF$ above form a left semi-model structure on the category $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
 \end{theorem}
+
+\section{Conjecture}
 
 
 \newpage

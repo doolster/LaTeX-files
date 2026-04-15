@@ -3,7 +3,7 @@
     "latex-workshop.format.fixQuotes.enabled": true,
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.intellisense.unimathsymbols.enabled": true,
-    "latex-workshop.latex.autoClean.run": "onBuilt",
+    "latex-workshop.latex.autoClean.run": "onFailed",
     "latex-workshop.latex.clean.fileTypes": [
         "%DOCFILE%.aux",
         "%DOCFILE%.bbl",
@@ -29,5 +29,26 @@
         "%DOCFILE%.nav",
         "%DOCFILE%.vrb",
         "*.fls"
+    ],
+    "cSpell.words": [
+        "axiomatize",
+        "bicomplete",
+        "Cartmell",
+        "cocomplete",
+        "cofibrant",
+        "Cofibrant",
+        "cofibrantly",
+        "cofibration",
+        "cofibrations",
+        "extensionality",
+        "fibrant",
+        "fibration",
+        "fibrations",
+        "functorial",
+        "functorially",
+        "homotopies",
+        "homotopy",
+        "morphism",
+        "morphisms"
     ]
 }
