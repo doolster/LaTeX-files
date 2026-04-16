@@ -1,0 +1,287 @@
+
+%% Basic thesis template by Beatrice Chetard (Ph.D. Western, 2019).
+%% Modify and redistribute at will, credit me if you'd like.
+%% Last updated in June 2019. Guidelines may have changed since then.
+
+\documentclass[12pt]{report} %add [titlepage] to have the title on its own page
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%														       PACKAGES    																 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Required:
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1.5in]{geometry} % margins as per SGPS guidelines
+\usepackage{appendix} % report class doesn't allow appendices by default
+\usepackage{setspace} % custom line spacing
+
+%% Optional/recommended. Uncomment as needed.
+%\usepackage{mathrsfs, mathtools, amsthm, amssymb, amsfonts} % 'nuff said
+%\usepackage{hyperref, cleveref}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 												PARAMETERS OF THE DOCUMENT                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Required:
+\pagestyle{headings} % chapter title + page number in the top margin
+\linespread{1.5} % should be between 1.5 and 2 as per SGPS guidelines
+
+%% Optional. Uncomment as needed.
+%\setlength{\emergencystretch}{3em} % prevents most overfull box shenanigans
+%\setcounter{tocdepth}{3} % subsubsections in table of contents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 														SPECIAL ENVIRONMENTS                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Required:
+\newenvironment{preliminary}
+{\pagestyle{plain}\pagenumbering{roman}}
+{\pagenumbering{arabic}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                      CV                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% This is a barebones CV template that worked for the author.
+%% Uncomment if you want to use it. There are no precise
+%% guidelines for this so get as fancy as you want.
+
+%\newlength{\datebox}\settowidth{\datebox}{typealotofcharacters}
+
+%\newcommand{\NewEntry}[3]{\noindent\hangindent=2em\hangafter=0 \parbox{\datebox}{\footnotesize \textit{#1}}\hspace{-3em} #2 #3}
+
+%\newcommand{\Description}[1]{\hangindent=2em\hangafter=0\noindent{#1}\par\normalsize\vspace{1em}}
+%\newcommand{\MarginText}[1]{\marginpar{\raggedleft\itshape\small#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                     MACROS                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Insert your macros here. I keep mine in a separate file but you do you.
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 MAIN DOCUMENT                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%------------------NO TITLE PAGE/CERTIFICATE OF EXAMINATION.-----------------%%
+%%
+%% The title page/certificate is generated automatically upon electronic
+%% submission so you don't need to worry about that. Actually, you're required
+%% NOT to have one when you submit (but legend has is, one can get away with it)
+
+
+
+
+
+\begin{document}
+
+%%--------------------------------FRONT MATTER--------------------------------%%
+%%
+%% Contains:
+%% Abstract and Keywords
+%% Summary for lay audience
+%% Co-Authorship statement (if applicable)
+%% Epigraph (optional)
+%% Dedication (ditto)
+%% Acknowledgements (optional but cmon, don't be selfish)
+%% Table of contents
+%% Lists of Tables, figures, Plates, Appendices (in that order, if applicable)
+%% List of Abbreviations, symbols, nomenclature (if applicable)
+%% Preface (optional, /!\ preface != introduction)
+
+
+
+
+\begin{preliminary}
+	\setcounter{page}{2} % start with page ii
+
+
+%% Abstract:
+%% If using hyperref uncomment following line (prevents a bug):
+  %\phantomsection
+	\addcontentsline{toc}{chapter}{Abstract}
+	\Large\begin{center}\textbf{Abstract}\end{center}\normalsize
+
+	Insert text.
+
+	\vfill %fill the rest of the page
+	\textbf{Keywords:} cool maths, sweet proofs, awesome results
+
+%% Summary for lay audience:
+	\newpage
+%% If using hyperref uncomment following line:
+  %\phantomsection
+	\addcontentsline{toc}{chapter}{Summary for lay audience}
+	\Large\begin{center}\textbf{Summary for lay audience}\end{center}\normalsize
+	
+	Insert text.
+
+%% Co-Authorship statement here:
+  %\newpage
+  %\phantomsection
+	%\addcontentsline{toc}{chapter}{Co-Authorship statement}
+  %\Large\begin{center}\textbf{Co-Authorship statement}\end{center}\normalsize
+  % Most of the material in this thesis has been copypasted from Wikipedia.
+
+
+
+%% Epigraph goes here:
+  %\newpage
+  %\vspace{4em}
+  %\begin{flushright}
+  %	\textit{People who think they know everything are a great annoyance to those of us who do.} \\
+  %	Isaac Asimov
+  %\end{flushright}
+
+
+
+%% Dedication:
+  %\newpage
+  %\vspace{4em}
+  %\begin{flushright}
+  %\textit{To nobody.}
+  %\end{flushright}
+
+
+%% Acknowledgements:
+	\newpage
+%% If using hyperref uncomment following line:
+  %\phantomsection
+	\addcontentsline{toc}{chapter}{Acknowledgements}
+	\Large\begin{center}\textbf{Acknowledgements}\end{center}\normalsize
+	
+	I would like to thank\ldots
+
+
+
+	\tableofcontents
+
+
+%% Add various lists of tables, figures, etc as appropriate
+
+
+
+\end{preliminary}
+
+
+
+
+%%------------------------------BODY OF THE THESIS------------------------------%%
+%%
+%% Contains:
+%% Introduction
+%% Middle sections/chapters
+%% Summary and conclusions
+%% Bibliography
+%% Appendices
+%% CV
+
+
+
+
+  \chapter{Introduction}
+  \setcounter{page}{1}
+  Insert text here.
+  % This must address the objectives of the work.
+  % For an integrated-article or alternative-format thesis this may explain how the work forms a coherent thesis.
+  % Literature review and/or research methods. (This may take the form of a stand-alone chapter or may be integrated into the introductory or middle chapters as appropriate for the discipline and the format of the thesis.)
+
+  \chapter{Middle Chapters}
+  Insert text here.
+  Add more chapters as appropriate.
+  % For an integrated-article thesis each article is presented without an abstract. Each chapter should contain connecting materials to provide logical bridges between the articles. A thesis consisting solely of published articles without connecting elements is not acceptable. For an alternative format thesis, middle chapter(s) may be replaced by other relevant text, images or artefacts.
+
+  \chapter{Conclusion}
+  Insert text here.
+
+% For an integrated-article thesis this may relate the separate studies to each other and to a relevant discipline or field of study.
+%For an alternative format thesis this may relate the introduction, literature review/methodology, middle chapter(s) and/or other text(s)/object(s) to each other and to the relevant discipline(s) or field(s) of study.  
+  
+
+%% Bibliography:
+  \newpage
+%% Uncomment if using hyperref
+  %\phantomsection
+  \addcontentsline{toc}{chapter}{Bibliography}
+  \begin{spacing}{1.1} % optional, change as appropriate
+    \bibliographystyle{alpha}
+    \bibliography{bibliography}
+  \end{spacing}
+
+
+
+%% CV:
+%%
+%% This is a barebones template that worked for me. There are no precise
+%% guidelines for this so get as fancy as you want.
+
+%  \newpage
+%% Uncomment if hyperref
+%  \phantomsection
+%  \pagestyle{empty}
+
+% \begin{spacing}{1}
+
+% \addcontentsline{toc}{chapter}{Curriculum Vitae}
+% \Large\begin{center}\textbf{Curriculum Vitae}\end{center}\normalsize
+
+% \noindent\textsc{Education}
+% \vspace{.5em}
+
+% \NewEntry{2025 - current}{Ph.D. $\cdot$ UWO - \textit{Canada}}
+
+% \NewEntry{2024-2025}{Master's $\cdot$ Somewhere - \textit{U.S.A.}}
+
+% \NewEntry{2017-2024}{Bachelor's $\cdot$ Somewhere else - \textit{France}}
+% \vspace{1em}
+
+% \noindent\textsc{Writings}
+% \vspace{.5em}
+
+% \Description{\textit{My first paper} \\ preprint, arXiv:abcd.efgh \vspace{.5em}\\
+% \textit{My second paper}\\ submitted, arXiv:ijkl.mnop}
+% \vspace{1em}
+
+% \noindent\textsc{Talks}
+% \vspace{.5em}
+
+% \Description{\textit{A talk about my works} $\cdot$ Seminars \\
+% Some various places \vspace{.5em} \\
+% \textit{Another talk about my work} $\cdot$ Conferences \\
+% That one conference that was great\\
+% That other one that was kinda meh}
+% \vspace{1em}
+
+% \noindent\textsc{Awards}
+% \vspace{.5em}
+
+% \Description{\textit{2019} $\cdot$ Prettiest person in the math department \\
+% \textit{Winter 2018} $\cdot$ Most likeable person on campus}
+% \vspace{1em}
+
+% \noindent\textsc{Teaching experience}\vspace{.5em}
+
+% \Description{\textit{Fall 2018} $\cdot$ Instructor, yoga \\
+% \textit{2016-2017} $\cdot$ Co-organizer of a human pyramid festival \\
+% \textit{2016, 2018} $\cdot$ Teaching assistant}
+
+% \end{spacing}
+
+\end{document}

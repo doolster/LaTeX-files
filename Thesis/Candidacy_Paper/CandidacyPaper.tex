@@ -22,6 +22,8 @@ Introduce necessary syntax, say something about the choice to not study syntax d
 
 (Should I introduce simplicial sets?)
 
+One of the simplest ways to realize an abstract notion of homotopy theory is through categories with weak equivalences. A \textbf{category with weak equivalences} is a category $C$ equipped with a wide subcategory $\cW$, whose maps we call weak equivalences. We can think of the weak equivalences as the maps which are invertible up to homotopy (whatever that may mean in this instance) but not necessarily invertible in $C$. We can then construct the homotopy category $\Ho C$ by freely inverting all the maps in $\cW$ (How can this not exist?). 
+
 The model of infinity categories that we wish to study is that of a quasicategory.
 \begin{definition}
     A simplicial set $X$ is called a \textbf{quasicategory} if it satisfies the following lifting property:
@@ -33,6 +35,8 @@ The model of infinity categories that we wish to study is that of a quasicategor
 \end{definition}
 
 We denote the full subcategory of $\sSet$ spanned by quasicategories by $\qCat$. We write $\tau_1\colon\sSet\to\Cat$ for the adjoint to the nerve functor, and we let $\qCat_2$ denote the 2-category of quasicategories, where the hom-categories are given by $\qCat_2(C,D):=\tau_1(D^C)$.
+
+To study the homotopy theory of quasicategories, we need a notion of weak equivalences which will be given by categorical equivalences of quasicategories. To define these, we first establish the notion of an $E[1]$-homotopy, where $E[1]$ is the nerve of the contractible groupoid on two objects. Two maps $f,g\colon X\to Y$ of simplicial sets are $E[1]$-\textbf{homotopic}, denoted $f\sim g$, if there exists a simplicial map $H\colon X\times E[1]\to Y$ whose restriction to $X\times\partial\Delta_1$ is $[f,g]$. A map $f\colon X\to Y$ is then a \textbf{categorical equivalence} if there exists a map $g\colon Y\to X$ such that $fg\sim1_Y$ and $gf\sim1_X$.
 
 At the core of the relationship between type theories and categories is the notion that the type formers on theory should correspond to imposing more categorical structure on the semantic side. In the case that we are interested in, the categorical structure that we expect is that of a locally Cartesian closed infinity category, a notion analogous to that of a locally Cartesian closed category, but requires some setup for our particular choice of model.
 
@@ -72,8 +76,12 @@ All of these notions straightforwardly dualize to coslice categories, colimits, 
 
 With this we can finally define what it means for a quasicategory to be locally Cartesian closed.
 \begin{definition}
-    A quasicategory $C$ is \textbf{locally Cartesian closed} if it has finite limits and for any 1-simplex $f\colon x\to y$, the pullback functor $f^*\colon C\downarrow y\to C\downarrow x$ has a right adjoint.
+    \begin{enumerate}
+        \item A quasicategory $C$ is \textbf{locally Cartesian closed} if it has finite limits and for any 1-simplex $f\colon x\to y$, the pullback functor $f^*\colon C\downarrow y\to C\downarrow x$ has a right adjoint.
+        \item A simplicial map between locally Cartesian closed quasicategories is called a \textbf{locally Cartesian closed functor} if it preserves finite limits and the locally Cartesian closed structure. (?)
+    \end{enumerate}
 \end{definition}
+We denote the subcategory of $\qCat$ spanned by locally Cartesian closed quasicategories and locally Cartesian closed functors as $\LCCC_\infty$.
 
 To study the homotopical aspects of dependent type theories, we introduce a slightly weakened version of a model category:
 \begin{definition}\cite[Def. 6.6]{KL18}
@@ -239,6 +247,13 @@ These classes of maps satisfy the hypotheses of \ref{lem:semi-model struct}, pro
 \end{theorem}
 
 \section{Conjecture}
+
+With our syntax given by contextual categories and semantics given by quasicategories, we finally have the background to start discussing the conjecture which is the primary motivation of this research. We saw previously that each contextual category has an underlying category with weak equivalences, giving us an inclusion $\CxlCat\to\weCat$. It is known that the categories $\weCat$ and $\qCat$ are DK-equivalent as categories with weak equivalences. We will call this equivalence $\Ho_\infty$ and note that it can be implemented in a number of ways (see \cite[$\S1.6$]{Barwick}), but, for concreteness, we will take it to be hammock localization followed by fibrant replacement and the homotopy coherent nerve, following \cite{KL18}. We can then define the map $\Cl_\infty$ as the following composite:
+\[\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}\xrightarrow{\quad}\weCat\xrightarrow{\Ho_\infty}\qCat.\]
+\cite{Kapulkin} shows us that this functor is homotopical and valued in $\LCCC_\infty$.
+\begin{theorem}\cite[Thm. 5.8]{Kapulkin}
+    The functor $\Cl$ takes values in the category $\LCCC_\infty$. It also takes equivalences of contextual categories to categorical equivalences of quasicategories.
+\end{theorem}
 
 
 \newpage

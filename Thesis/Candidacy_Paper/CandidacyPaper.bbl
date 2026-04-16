@@ -10,6 +10,11 @@ Jeremy Avigad, Krzysztof Kapulkin, and Peter~Lefanu Lumsdaine.
 \newblock Homotopy limits in type theory.
 \newblock {\em Mathematical Structures in Computer Science}, 25(5):1040–1070, 2015.
 
+\bibitem{Barwick}
+Clark Barwick.
+\newblock On the algebraic k-theory of higher categories.
+\newblock {\em Journal of Topology}, 9:245--347, 2016.
+
 \bibitem{Cartmell}
 John Cartmell.
 \newblock {\em Generalized Algebraic Thoeries and Contextual Categories}.
@@ -19,6 +24,11 @@ John Cartmell.
 Richard Garner.
 \newblock Two-dimensional models of type theory.
 \newblock {\em Math. Structures in Computer Sci.}, 2009.
+
+\bibitem{Kapulkin}
+Krzysztof Kapulkin.
+\newblock Locally cartesian closed quasicategories from type theory.
+\newblock {\em Journal of Topology}, 10:1029--1049, 2017.
 
 \bibitem{KL18}
 Krzysztof Kapulkin and Peter~LeFanu Lumsdaine.
