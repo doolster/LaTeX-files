@@ -103,6 +103,7 @@
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem{rem}[thm]{Remark}
 \newtheorem{notn}[thm]{Notation}
+\newtheorem{conj}[thm]{Conjecture}
 % \newtheorem*{rem}{Remark}
 
 \newtheorem{defn}[thm]{Definition}
@@ -118,6 +119,9 @@
 % -------------------
 % Commands
 % -------------------
+
+% in text notes
+\newcommand{\note}[1]{{\color{red}{(#1)}}}
 
 % Special Characters
 \def\N{\mathbb{N}}
@@ -151,6 +155,7 @@
 \newcommand{\qCat}{\operatorname{\mathbf{qCat}}}
 \newcommand{\LCCC}{\operatorname{\mathbf{LCCC}}}
 \newcommand{\nCat}{\operatorname{\mathbf{nCat}}}
+\newcommand{\sCat}{\operatorname{\mathbf{sCat}}}
 \newcommand{\Grpd}{\operatorname{\mathbf{Grpd}}}
 \newcommand{\Kan}{\operatorname{\mathbf{Kan}}}
 \newcommand{\Ch}{\operatorname{\mathbf{Ch}}}
@@ -279,8 +284,6 @@
 \let\supset\supseteq
 \let\ge\geqslant
 \let\le\leqslant
-
-% \newcommand{\ZAJJ}[1]{{\color{blue}\emph{From Zajj:} #1}}
 
 %for theorems
 \declaretheorem[name=Proposition]{proposition}

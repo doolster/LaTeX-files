@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{AR}
 Jiř\'i Ad\'amek and Jiř\'i Rosick\'y.
@@ -20,10 +20,25 @@ John Cartmell.
 \newblock {\em Generalized Algebraic Thoeries and Contextual Categories}.
 \newblock PhD thesis, Oxford, 1978.
 
+\bibitem{DK}
+W.G. Dwyer and D.M. Kan.
+\newblock Calculating simplicial localizations.
+\newblock {\em Journal of Pure and Applied Algebra}, 18(1):17--35, 1980.
+
 \bibitem{Garner}
 Richard Garner.
 \newblock Two-dimensional models of type theory.
 \newblock {\em Math. Structures in Computer Sci.}, 2009.
+
+\bibitem{KS15}
+Chris Kapulkin and Karol Szumiło.
+\newblock Quasicategories of frames of cofibration categories.
+\newblock {\em Applied Categorical Structures}, 25:323--347, 2015.
+
+\bibitem{KS17}
+Chris Kapulkin and Karol Szumiło.
+\newblock Internal language of finitely complete $(\infty, 1)$-categories.
+\newblock {\em Selecta Mathematica}, 25, 09 2017.
 
 \bibitem{Kapulkin}
 Krzysztof Kapulkin.
@@ -39,6 +54,15 @@ Krzysztof Kapulkin and Peter~LeFanu Lumsdaine.
 Krzysztof Kapulkin and Peter~LeFanu Lumsdaine.
 \newblock The simplicial model of univalent foundations (after voevodsky).
 \newblock {\em Journal of the European Mathematical Society}, 23(6):2071–2126, March 2021.
+
+\bibitem{Petrowitsch}
+Maximilian Petrowitsch.
+\newblock Elementary $\infty$-toposes from type theory, 2025.
+
+\bibitem{Szumilo}
+Karol Szumiło.
+\newblock {\em Two Models for the Homotopy Theory of Cocomplete Homotopy Theories}.
+\newblock PhD thesis, University of Bonn, 2014.
 
 \bibitem{hottbook}
 The {Univalent Foundations Program}.

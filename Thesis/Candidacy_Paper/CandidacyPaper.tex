@@ -15,14 +15,18 @@
 \section{Introduction}
 syntax/semantics for type theory/higher cat. theory, history
 
-Introduce necessary syntax, say something about the choice to not study syntax directly, syntactic category of a tt
+Introduce necessary syntax, say something about the choice to not study syntax directly, syntactic category of a tt, initiality?
 
 \section{Background}
-(different section for homotopy theory vs. semantics?)
+\note{different section for homotopy theory vs. semantics?}
 
-(Should I introduce simplicial sets?)
+\note{Should I introduce simplicial sets?}
 
-One of the simplest ways to realize an abstract notion of homotopy theory is through categories with weak equivalences. A \textbf{category with weak equivalences} is a category $C$ equipped with a wide subcategory $\cW$, whose maps we call weak equivalences. We can think of the weak equivalences as the maps which are invertible up to homotopy (whatever that may mean in this instance) but not necessarily invertible in $C$. We can then construct the homotopy category $\Ho C$ by freely inverting all the maps in $\cW$ (How can this not exist?). 
+One of the simplest ways to realize an abstract notion of homotopy theory is through categories with weak equivalences. A \textbf{category with weak equivalences} is a category $C$ equipped with a wide subcategory $\cW$, whose maps we call weak equivalences. We can think of the weak equivalences as the maps which are invertible up to homotopy (whatever that may mean in this instance) but not necessarily invertible in $C$. We can then construct the homotopy category $\Ho C$ by freely inverting all the maps in $\cW$ (How can this not exist?). While this category correctly realizes the homotopical structure that we are interested in, it is in general difficult to work with, so we work with it indirectly by considering the pair $(C,\cW)$. We call a functor between categories with weak equivalences which preserves weak equivalences \textbf{homotopical}, and we denote the category of categories with weak equivalences and homotopical functors as $\weCat$.
+
+The category $\weCat$ can itself be though of as a category with weak equivalences, where the weak equivalences are given by Dwyer-Kan equivalences (DK-equivalences). A DK-equivalence is a homotopical functor $F\colon C\to D$, which when we take the hammock localization \cite{DK} $L^H\colon\weCat\to\sCat$, is essentially surjective and $\infty$-full and faithful, i.e. for all $x,y\in L^HC$ the simplicial map
+$$ L^HF_{x,y}\colon L^HC(x,y)\to L^HD(L^HFx,L^HFy) $$
+is a weak homotopy equivalence (of simplicial sets).
 
 The model of infinity categories that we wish to study is that of a quasicategory.
 \begin{definition}
@@ -185,7 +189,7 @@ Following \cite[Prop. 3.3.1]{Garner}, we can extend the notion of $\Id$-type str
     Given maps $f,g:\Gamma\to\Delta$ in a contextual category $C$, a \textbf{homotopy} $H$ from $f$ to $g$, denoted $H\colon f\sim g$, is a factorization of the map $(f,g)\colon\Gamma\to\Delta\times\Delta:=\Delta.p_\Delta^*\Delta$ through the identity context $\Delta.p_\Delta^*\Delta.\Id_\Delta\to\Delta.p^*_\Delta\Delta$.
 \end{definition}
 
-With this we can define a notion of equivalence within a contextual category to match the syntactic notion of equivalence (or one of such equivalent notions \cite[Ch. 4]{hottbook}.
+With this we can define a notion of equivalence within a contextual category to match the syntactic notion of equivalence (or one of such equivalent notions \cite[Ch. 4]{hottbook}).
 
 \begin{definition}
     Let $C$ be a contextual category with identity types.
@@ -231,7 +235,7 @@ These will make up the class $\cW$ of our left semi-model structure. The remaini
     We now define the \textbf{trivial fibrations}, $\cT\cF$, as the right lifting class of $I$, the \textbf{cofibrations}, $\cC$, as the left lifting class of $\cT\cF$, the \textbf{fibrations}, $\cF$, as the right lifting class of $J$, and the \textbf{anodyne maps}, $\cA$, as the left lifting class of $\cF$.
 \end{definition}
 
-By the small object argument (ref?), we get:
+By the small object argument \note{ref?}, we get:
 \begin{prop}
     $(\cC,\cT\cF)$ and $(\cA,\cF)$ are both weak factorization systems.
 \end{prop}
@@ -254,6 +258,33 @@ With our syntax given by contextual categories and semantics given by quasicateg
 \begin{theorem}\cite[Thm. 5.8]{Kapulkin}
     The functor $\Cl$ takes values in the category $\LCCC_\infty$. It also takes equivalences of contextual categories to categorical equivalences of quasicategories.
 \end{theorem}
+
+We can now finally state the conjecture:
+\begin{conj}\cite[Conj. 3.7]{KL18}
+    The functor
+    \[\Cl_\infty\colon\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}\to\LCCC_\infty\]
+    is a DK-equivalence of categories with weak equivalences.
+\end{conj}
+
+The original conjecture additionally contained a "layer" below this, supposing that contextual categories equipped with only identity, unit, and sigma type formers should be equivalent to finitely complete quasicategories. This part of the conjecture has, however, already been proven in \cite{KS17} \note{comparison between compCat and CxlCat?}. \cite{KL18} also suggests a further extension of this conjecture where contextual categories modeling homotopy type theories should be equivalent to elementary infinity toposes, however, at the time of publishing, neither of these concepts were well defined. Since then the requisite categories have been constructed and the analogous functor has been shown to be valued in elementary infinity toposes in \cite{Petrowitsch} \note{mention preprint?}.
+
+\section{Approach}
+
+\note{why does the proof for the first layer not generalize easily?}
+
+The issue with a direct approach to the conjecture is that the functor $\Cl_\infty$ is difficult to do computations with, in particular because of the fibrant replacement that is involved in constructing $\Ho_\infty$. This leads us to search for functors which are equivalent to the desired construction, but are easier to work with such as the quasicategory of frames (constructed in \cite{Szumilo}, and shown to be equivalent to $\Ho_\infty$ in \cite{KS15}). Even this functor however has the problem of having no clear inverse, which would be desirable for something that we wish to show is a DK-equivalence.
+
+Our \note{my?} goal then is to construct a new functor, equivalent to $\Cl_\infty$, using a nerve construction, which provides the immediate benefit of coming equipped with an adjoint that would act as a good candidate for an inverse.
+
+\begin{definition}
+    Given a cosimplicial object $X\colon\Delta\to C$ in some cocomplete category $C$, we can get a map $|-|\colon\sSet\to C$, called the \textbf{realization}, by taking a left Kan extension of $X$ along the Yoneda embedding $y\colon\Delta\to\sSet$. The \textbf{(simplicial) nerve} is then the induced right adjoint $N\colon C\to\sSet$. For an object $Y\in C$, the simplicial set $N(Y)$ is defined by the formula $N(Y)_n=C(X_n,Y)$.
+\end{definition}
+
+\begin{ex}
+    The nerve of a category is given by the inclusion $\Delta\hookrightarrow\Cat$, which for a category $C$ tells us that $N(C)_n=\Cat([n],C)$ is the set of objects in $C$ for $n=0$, and composable $n$-chains of morphisms in $C$ for $n>0$.
+\end{ex}
+
+To get the desired functor from $\CxlCat$ to $\qCat$ then, all that is necessary is to find the "correct" simplicial object in $\CxlCat$ which induces a nerve functor that is valued in quasicategories and equivalent to $\Cl_\infty$. 
 
 
 \newpage
