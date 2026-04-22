@@ -108,6 +108,8 @@ In many cases, one typically has slightly more structure:
     Then the classes $(\cW,\cC,\cF)$ form a left semi-model structure on $\cE$.
 \end{lem}
 
+\note{Reedy theory}
+
 
 
 
@@ -275,14 +277,18 @@ The issue with a direct approach to the conjecture is that the functor $\Cl_\inf
 Our goal then is to construct a new functor, equivalent to $\Cl_\infty$, using a nerve construction, which provides the immediate benefit of coming equipped with an adjoint that would act as a good candidate for an inverse.
 
 \begin{defn}
-    Given a cosimplicial object $X\colon\Delta\to C$ in some cocomplete category $C$, we can get a map $|-|\colon\sSet\to C$, called the \textbf{realization}, by taking a left Kan extension of $X$ along the Yoneda embedding $y\colon\Delta\to\sSet$. The \textbf{(simplicial) nerve} is then the induced right adjoint $N\colon C\to\sSet$. For an object $Y\in C$, the simplicial set $N(Y)$ is defined by the formula $N(Y)_n=C(X_n,Y)$.
+    Given a cosimplicial object $X\colon\Delta\to C$ in some cocomplete category $C$, we can get a map $|-|\colon\sSet\to C$, called the \textbf{(simplicial) realization}, by taking a left Kan extension of $X$ along the Yoneda embedding $y\colon\Delta\to\sSet$. The \textbf{(simplicial) nerve} is then the induced right adjoint $N\colon C\to\sSet$. For an object $Y\in C$, the simplicial set $N(Y)$ is defined by the formula $N(Y)_n=C(X_n,Y)$.
 \end{defn}
 
 \begin{ex}
     The nerve of a category is given by the inclusion $\Delta\hookrightarrow\Cat$, which for a category $C$ tells us that $N(C)_n=\Cat([n],C)$ is the set of objects in $C$ for $n=0$, and composable $n$-chains of morphisms in $C$ for $n>0$.
 \end{ex}
 
-To get the desired functor from $\CxlCat$ to $\qCat$ then, all that is necessary is to find the "correct" simplicial object in $\CxlCat$ which induces a nerve functor that is valued in quasicategories and equivalent to $\Cl_\infty$. There is a "obvious" cosimplicial object $\T$ in $\CxlCat$ whose theories are freely generated, for each $n\in\N$, by closed types $A_i$, for each $i\in[n]$, and terms $x:A_i\vdash f_{i+1}(x):A_{i+1}$, for each $i\in[n-1]$, where the face maps are given by the obvious inclusions and the degeneracy maps $\sigma_i\colon\T_{n+1}\to\T_n$, are defined by sending $f_{i+1}$ to $\id_{A_i}$. 
+To get the desired functor from $\CxlCat$ to $\qCat$ then, all that is necessary is to find the "correct" simplicial object in $\CxlCat$ which induces a nerve functor that is valued in quasicategories and equivalent to $\Cl_\infty$. There is an "obvious" cosimplicial object $\T$ in $\CxlCat$ whose theories are freely generated, for each $n\in\N$, by closed types $A_i$, for each $i\in[n]$, and terms $x:A_i\vdash f_{i+1}(x):A_{i+1}$, for each $i\in[n-1]$, where the face maps are given by the obvious inclusions and the degeneracy maps $\sigma_i\colon\T_{n+1}\to\T_n$, are defined by sending $f_{i+1}$ to $\id_{A_i}$.
+
+The issue with this cosimplcial object is that it is in a sense too strict. To properly capture the struture of our typetheories, we would expect the theory representing the 2-simplex to not just have a single map $x:A_0\vdash f_2(f_1(x)):A_2$, but rather there should be a distinct map, say $f_{02}$ connecting the types $A_0$ and $A_2$ and a term identifying these two maps, i.e. $x:A_0\vdash\alpha(x):\Id_{A_2}(f_{02}(x),f_2(f_1(x)))$. What this means concretly is that $\T$ is not Reedy cofibrant, and thus mapping out of it does not result in a fibrantly valued nerve functor (where the fibrant objects in the Joyal model structure on $\sSet$ are quasicategories).
+
+This situation is analogous to that of the homotopy coherent nerve \note{source?} for simplicial categories, where the naive inclusion $\Delta\hookrightarrow\Cat\hookrightarrow\sCat$, does not produce a nerve functor that properly accounts for the homotopical data, i.e. the simplicial enrichment, on $\sCat$. The solution to this is then to consider "fattened" simplicies which account for the homtopical structure and are a Reedy cofibrant replacement of the naive cosimplicial object. 
 
 
 \newpage
