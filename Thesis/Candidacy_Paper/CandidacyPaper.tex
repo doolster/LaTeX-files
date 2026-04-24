@@ -1,5 +1,5 @@
 \documentclass{amsart}
-\usepackage{style}
+\usepackage{../style}
 
 \usepackage[margin = 1.25in]{geometry}
 
@@ -108,9 +108,7 @@ In many cases, one typically has slightly more structure:
     Then the classes $(\cW,\cC,\cF)$ form a left semi-model structure on $\cE$.
 \end{lem}
 
-\note{Reedy theory}
-
-
+\note{transition}
 
 
 The models of type theories that we are most interested in is that of contextual categories, as introduced by Cartmell in his thesis \cite{Cartmell}.
@@ -235,7 +233,7 @@ These will make up the class $\cW$ of our left semi-model structure. The remaini
     We now define the \textbf{trivial fibrations}, $\cT\cF$, as the right lifting class of $I$, the \textbf{cofibrations}, $\cC$, as the left lifting class of $\cT\cF$, the \textbf{fibrations}, $\cF$, as the right lifting class of $J$, and the \textbf{anodyne maps}, $\cA$, as the left lifting class of $\cF$.
 \end{defn}
 
-By the small object argument \cite{Quillen}, we get:
+By the small object argument \cite{Quillen} \note{check smallness}, we get:
 \begin{prop}
     $(\cC,\cT\cF)$ and $(\cA,\cF)$ are both weak factorization systems.
 \end{prop}
@@ -249,7 +247,11 @@ These classes of maps satisfy the hypotheses of \ref{lem:semi-model struct}, pro
 \begin{thm}\cite[Thm. 6.9]{KL18}
     The classes $\cW,\cC,\cF$ above form a left semi-model structure on the category $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
 \end{thm}
+\begin{sketch}
+    We show that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ satisfies the hypotheses of \ref{lem:semi-model struct}. As noted before, we know that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ is bicomplete, as a category of models of an essentially algebraic theory, and as we saw above, we have two weak factorization systems, $(\cC,\cT\cF)$ and $(\cA,\cF)$, constructed with the small objects argument. Showing that the class $\cW$ satisfies the right closure properties and that $\cT\cF=\cF\cap\cW$ are straight forward arguments, so the bulk of the work that is required is in showing that maps with cofibrant source are anodyne exactly when they are both cofibrations and weak equivalences.
 
+    First off, the inclusion $\cA\subseteq\cC$ follows dually from the fact that $\cT\cF\subseteq\cF$, which is immediate from their construction.
+\end{sketch}
 \note{proof sketch}
 
 \section{Conjecture}
@@ -268,7 +270,7 @@ We can now finally state the conjecture:
     is a DK-equivalence of categories with weak equivalences.
 \end{conj}
 
-The original conjecture additionally contained a "layer" below this, supposing that contextual categories equipped with only identity, unit, and sigma type formers should be equivalent to finitely complete quasicategories. This part of the conjecture has, however, already been proven in the most part in \cite{KS17}, where the authors show that the category of fintiely complete quasicategories is DK-equivalent to the category of comprehension categories (another semantic model for type theories). The connection between comprehension categories and contextual categories, especially when equipped with type formers, reamians not completely understood. \cite{KL18} also suggests a further extension of this conjecture where contextual categories modeling homotopy type theories should be equivalent to elementary infinity toposes, however, at the time of publishing, neither of these concepts were well defined. Since then, the requisite categories have been constructed and the analogous functor has been shown to be valued in elementary infinity toposes in \cite{Petrowitsch}.
+The original conjecture additionally contained a "layer" below this, supposing that contextual categories equipped with only identity, unit, and sigma type formers should be equivalent to finitely complete quasicategories. This part of the conjecture has, however, already been proven in the most part in \cite{KS17}, where the authors show that the category of finitely complete quasicategories is DK-equivalent to the category of comprehension categories (another semantic model for type theories). The connection between comprehension categories and contextual categories, especially when equipped with type formers, remains not completely understood. \cite{KL18} also suggests a further extension of this conjecture where contextual categories modeling homotopy type theories should be equivalent to elementary infinity toposes, however, at the time of publishing, neither of these concepts were well defined. Since then, the requisite categories have been constructed and the analogous functor has been shown to be valued in elementary infinity toposes in \cite{Petrowitsch}.
 
 \section{Approach}
 
@@ -284,11 +286,79 @@ Our goal then is to construct a new functor, equivalent to $\Cl_\infty$, using a
     The nerve of a category is given by the inclusion $\Delta\hookrightarrow\Cat$, which for a category $C$ tells us that $N(C)_n=\Cat([n],C)$ is the set of objects in $C$ for $n=0$, and composable $n$-chains of morphisms in $C$ for $n>0$.
 \end{ex}
 
-To get the desired functor from $\CxlCat$ to $\qCat$ then, all that is necessary is to find the "correct" simplicial object in $\CxlCat$ which induces a nerve functor that is valued in quasicategories and equivalent to $\Cl_\infty$. There is an "obvious" cosimplicial object $\T$ in $\CxlCat$ whose theories are freely generated, for each $n\in\N$, by closed types $A_i$, for each $i\in[n]$, and terms $x:A_i\vdash f_{i+1}(x):A_{i+1}$, for each $i\in[n-1]$, where the face maps are given by the obvious inclusions and the degeneracy maps $\sigma_i\colon\T_{n+1}\to\T_n$, are defined by sending $f_{i+1}$ to $\id_{A_i}$.
+To get the desired functor from $\CxlCat$ to $\qCat$ then, all that is necessary is to find the "correct" simplicial object in $\CxlCat$ which induces a nerve functor that is valued in quasicategories and equivalent to $\Cl_\infty$. There is an "obvious" cosimplicial object $\T$ in $\CxlCat$ whose theories are freely generated, for each $n\in\N$, by closed types $A_i$, for each $i\in[n]$, and terms $x:A_i\vdash f_{i+1}(x):A_{i+1}$, for each $i\in[n-1]$,. The face maps $\delta_i\colon\T_{n-1}\to\T_n$ are given by sending $f_i$ to $f_{i+1}\circ f_i$, and the degeneracy maps $\sigma_i\colon\T_{n+1}\to\T_n$, are defined by sending $f_{i+1}$ to $\id_{A_i}$.
 
-The issue with this cosimplcial object is that it is in a sense too strict. To properly capture the struture of our typetheories, we would expect the theory representing the 2-simplex to not just have a single map $x:A_0\vdash f_2(f_1(x)):A_2$, but rather there should be a distinct map, say $f_{02}$ connecting the types $A_0$ and $A_2$ and a term identifying these two maps, i.e. $x:A_0\vdash\alpha(x):\Id_{A_2}(f_{02}(x),f_2(f_1(x)))$. What this means concretly is that $\T$ is not Reedy cofibrant, and thus mapping out of it does not result in a fibrantly valued nerve functor (where the fibrant objects in the Joyal model structure on $\sSet$ are quasicategories).
+The issue with this cosimplcial object is that it is in a sense too strict. To properly capture the structure of our type theories, we would expect the theory representing the 2-simplex, for example, to not just have a single map $x:A_0\vdash f_2(f_1(x)):A_2$, but rather there should be a distinct map, say $f_{02}$ connecting the types $A_0$ and $A_2$ and a term identifying these two maps, i.e. $x:A_0\vdash\alpha(x):\Id_{A_2}(f_{02}(x),f_2(f_1(x)))$. The "simplices" in $\T$ contain none of the homotopical information present in our type theories i.e. they do not have any identity terms, so mapping out of them into a theory $\bS$ would not capture any of the higher structure in $\bS$. What this means more concretely is that $\T$ is not Reedy cofibrant, and so we should not expect that the mapping space from $\T$ to a fibrant object $\bS$ (reminder that all theories are fibrant) would be a fibrant simplicial set in the Joyal model structure i.e. a quasicategory.
 
-This situation is analogous to that of the homotopy coherent nerve \note{source?} for simplicial categories, where the naive inclusion $\Delta\hookrightarrow\Cat\hookrightarrow\sCat$, does not produce a nerve functor that properly accounts for the homotopical data, i.e. the simplicial enrichment, on $\sCat$. The solution to this is then to consider "fattened" simplicies which account for the homtopical structure and are a Reedy cofibrant replacement of the naive cosimplicial object. 
+This situation is analogous to that of the homotopy coherent nerve for simplicial categories (see \cite[Ch. 1]{Lurie} for more exposition), where the naive inclusion $\Delta\hookrightarrow\Cat\hookrightarrow\sCat$, does not produce a nerve functor that properly accounts for the homotopical data, i.e. the simplicial enrichment, on $\sCat$. The solution to this is then to consider "thickened" simplices which account for the homotopical structure and are a Reedy cofibrant replacement of the naive cosimplicial object. We wish to attempt something similar in our context, but to make sure that a Reedy cofibrant replacement exists, we need some sort of Reedy left semi-model structure on $\CxlCat^\Delta$.
+
+To do this, we first recall some of the basic definitions of Reedy theory.
+
+\begin{defn}
+    A \textbf{Reedy category}, is a category $\cR$ equipped with two wide subcategories $\cR_+$ and $\cR_-$ and a total ordering on the objects defined by a degree function $d\colon\Ob(\cR)\to\N$ such that,
+    \begin{enumerate}
+        \item Every non-identity morphism in $\cR_+$ raises degree,
+        \item Every non-identity morphism in $\cR_-$ lowers degree, and
+        \item Every morphism $f\in\cR$ uniquely factors as a map in $\cR_-$ followed by a map in $\cR_+$.
+    \end{enumerate}
+\end{defn}
+
+\begin{ex}
+    The prototypical example of a Reedy category, and the one we are interested in, is the simplex category $\Delta$, where $\Delta_+$ is given by the monomorphisms, and $\Delta_-$ is given by the epimorphisms.
+\end{ex}
+
+A category of diagrams indexed by a Reedy category and valued in a model category comes equipped with a natural model structure whose (co)fibrations are defined in the following way.
+
+\begin{defn}
+    Let $\cR$ be a Reedy category, $\cM$ a (co)complete category, $X$ an object in $\cM^\cR$, and $\alpha$ an object of $\cR$.
+    \begin{enumerate}
+        \item The \textbf{latching object} of $X$ at $\alpha$ is defined as $L_\alpha X:=\colim_{\beta\underset{+}{\to}\alpha}X_\beta$, where the colimit is taken over all non-identity arrows over $\alpha$ in $\cR_+$. The natural map $L_\alpha X\to X_\alpha$ is called the \textbf{latching map}.
+        \item The \textbf{matching object} of $X$ at $\alpha$ is defined as $M_\alpha X:=\lim_{\alpha\underset{-}{\to}\beta}X_\beta$, where the limit is taken over all non-identity arrows under $\alpha$ in $\cR_-$. The natural map $X_\alpha\to M_\alpha X$ is called the \textbf{matching map}.
+    \end{enumerate}
+\end{defn}
+\begin{defn}
+    Let $\cR$ be a Reedy category, $\cM$ a model category (or more generally a category with a classes of (co)fibrations), and $f\colon X\to Y$ a map of diagrams in $\cM^\cR$.
+    \begin{enumerate}
+        \item The map $f$ is a \textbf{Reedy cofibration} if, for every object $\alpha\in\cR$, the \textbf{relative latching map}
+        \[X_\alpha\amalg_{L_\alpha X}L_\alpha Y\to Y_\alpha\]
+        is a cofibration in $\cM$.
+        \item The map $f$ is a \textbf{Reedy fibration} if, for every object $\alpha\in\cR$, the \textbf{relative matching map}
+        \[X_\alpha\to Y_\alpha\times_{M_\alpha Y}M_\alpha X\]
+        is a fibration in $\cM$.
+    \end{enumerate}
+\end{defn}
+
+While the standard Reedy model structure for diagrams valued in a model category is well understood, since we only have a left semi-model structure on $\CxlCat$, we wish to construct an analogous Reedy left semi-model structure on $\cM^\cR$ when $\cM$ does not have a full model structure.
+
+\begin{thm}\label{thm:reedy left-semi model struct}
+    Let $\cM$ be a category satisfying the hypotheses of \ref{lem:semi-model struct}, and $\cR$ a Reedy category. The category $\cM^\cR$ comes equipped with a left semi-model structure where weak equivalences are component-wise, and (co)fibrations are Reedy (co)fibrations.
+\end{thm}
+
+The necessitation of $\cM$ satisfying the slightly stronger hypotheses of \ref{lem:semi-model struct}, comes from the use of the following lemma, which requires the existence of the $(\cA,\cF)$ weak factorization system.
+\begin{lem}
+    Suppose $\cM$ is a category which satisfies the hypotheses of \ref{lem:semi-model struct}. A pushout of a trivial cofibration with cofibrant source along a cofibration in $\cM$ is a trivial cofibration.
+\end{lem}
+
+\begin{sketch}
+    The proof mostly follows from standard inductive arguments using the Reedy structure of $\cR$ (see \cite[Ch. 15]{Hirshhorn}, \cite[Ch. 9]{RadulescuBanu}).
+
+    For the inductive step of lifting a Reedy trivial cofibration with cofibrant source $A\overset{\sim}{\rightarrowtail}B$, against a Reedy fibration $X\twoheadrightarrow Y$. By \cite[15.2.11]{Hirshhorn} (note: this is the lemma which motivates the definition of Reedy (co)fibrations) all that is necessary is to construct a lift in the following diagram:
+    \[\begin{tikzcd}
+        A_\alpha\coprod_{L_\alpha A}L_\alpha B \arrow[r] \arrow[d, tail] & X_\alpha \arrow[d, two heads]\\
+        B_\alpha \arrow[r] & Y_\alpha\times_{M_\alpha Y}M_\alpha X
+    \end{tikzcd}.\]
+    To get this lift, we need to know that $A_\alpha\coprod_{L_\alpha A}L_\alpha B$ is cofibrant in $\cM$ and that the left map is a weak equivalence. Since $A\to B$ is a Reedy trivial cofibration, we get that $L_\alpha A\to L_\alpha B$ is a trivial cofibration for all $\alpha$, so $A_\alpha\to A_\alpha\coprod_{L_\alpha A}L_\alpha B$ is as well by the previous lemma. Since $A_\alpha\to B_\alpha$ is a weak equivalence and can be factored as $A_\alpha\to A_\alpha\coprod_{L_\alpha A}L_\alpha B\to B_\alpha$, we get that our desired map is a weak equivalence as well by 2-out-of-3. To see that $A_\alpha\coprod_{L_\alpha A}L_\alpha B$ is cofibrant, we note that $A_\alpha$ is cofibrant and the map $A_\alpha\to A_\alpha\coprod_{L_\alpha A}L_\alpha B$ is a cofibration.
+
+    For the factorization of a map $f\colon X\to Y$, with $X$ cofibrant, into a Reedy trivial cofibration followed by a Reedy fibration, we work degree wise by induction, assuming that $f$ has been factored for all objects of degree less than that of $\alpha$, we get an induced map $X_\alpha\coprod_{L_\alpha X}L_\alpha Z\to Y_\alpha\times_{M_\alpha Y}M_\alpha Z$, which we can apply factorization in $\cM$ since the previous lemma tells us that the source is cofibrant. This gives us our factorization into a cofibration and a fibration, all that remains is to show that the map $X_\alpha\to Z_\alpha$ is a weak equivalence. This follows from the fact that it can be factored as $X_\alpha\to X_\alpha\coprod_{L_\alpha X}L_\alpha Z\to Z_\alpha$, where the second map is a trivial cofibration by our factorization in $\cM$, and the first map is a trivial cofibration as a pushout of a trivial cofibration with cofibrant source along a cofibration.
+
+    The remaining parts of the proof are essentially the same as the proof for the standard Reedy model structure as that "half" of the left semi-model structure is identical to the definition of a standard model structure.
+\end{sketch}
+
+\begin{cor}
+    There exists a Reedy left semi-model structure on the category $\CxlCat^\Delta$.
+\end{cor}
+
+With this we know that it is possible to take a Reedy cofibrant replacement of our cosimplicial object $\T$ by factoring the map $0\to\T$ as a Reedy cofibration followed by a Reedy trivial fibration, but this construction is still quite difficult to work with. Even if we automatically have that the resulting nerve functor is valued in quasicategories, proving anything further, e.g. showing that these quasicategories are locally Cartesian closed, would be difficult. For this reason we wish to construct a more explicit Reedy cofibrant replacement on $\CxlCat^\Delta$, and this is the direction of current research.
 
 
 \newpage

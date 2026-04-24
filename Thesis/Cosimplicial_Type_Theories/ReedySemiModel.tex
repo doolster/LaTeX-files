@@ -1,5 +1,5 @@
 \documentclass{amsart}
-\usepackage{style}
+\usepackage{../style}
 
 \usepackage[margin = 1.25in]{geometry}
 
@@ -189,7 +189,7 @@
     \end{tikzpicture}\end{matrix},\]
     where the maps $A_\alpha\to B_\alpha$ and $X_\alpha\to Y_\alpha$ are a trivial cofibration and fibration, respectively, by the definition of Reedy (co)fibrations (noting that in degree 0, the latching objects are all initial and the matching objects are all terminal). The lift is then constructed using the lifting properties in $\cM$, noting that $A_\alpha$ is cofibrant by \ref{lem:cofib objs}. For the inductive step, all that is necessary is to construct a lift in the following diagram by \cite[15.2.11]{Hirshhorn},
     \[\begin{matrix}\begin{tikzpicture}
-        \node (A) at (0,0) {$A_\alpha\coprod_{L_\alpha A}B_\alpha$};
+        \node (A) at (0,0) {$A_\alpha\coprod_{L_\alpha A}L_\alpha B$};
         \node (X) at (2,0) {$X_\alpha$};
         \node (B) at (0,-2) {$B_\alpha$};
         \node (Y) at (2,-2) {$Y_\alpha\times_{M_\alpha Y}M_\alpha X$};
@@ -222,10 +222,6 @@
 \begin{proof}
     For the verification of the hypotheses of \ref{lem:semi-model struct}, see \cite[\S 6]{KL}.
 \end{proof}
-
-\begin{lem}
-    Let $f\colon\T\to\bS$ be a map of contextual categories, with $\T$ cofibrant. We define the image of $f$ to be 
-\end{lem}
 
 \section{Simplicial Mapping Space}
 
