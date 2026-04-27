@@ -18,15 +18,19 @@ syntax/semantics for type theory/higher cat. theory, history
 Introduce necessary syntax, say something about the choice to not study syntax directly, syntactic category of a tt, initiality?
 
 \section{Background}
-\note{different section for homotopy theory vs. semantics?}
 
-One of the simplest ways to realize an abstract notion of homotopy theory is through categories with weak equivalences. A \textbf{category with weak equivalences} is a category $C$ equipped with a wide subcategory $\cW$, whose maps we call weak equivalences. We can think of the weak equivalences as the maps which are invertible up to homotopy (whatever that may mean in this instance) but not necessarily invertible in $C$. We can then construct the homotopy category $\Ho C$ by freely inverting all the maps in $\cW$ \note{How can this not exist?}. While this category correctly realizes the homotopical structure that we are interested in, it is in general difficult to work with, so we work with it indirectly by considering the pair $(C,\cW)$. We call a functor between categories with weak equivalences which preserves weak equivalences \textbf{homotopical}, and we denote the category of categories with weak equivalences and homotopical functors as $\weCat$.
+\subsection{Homotopy Theory}
+One of the simplest ways to realize an abstract notion of homotopy theory is through categories with weak equivalences. A \textbf{category with weak equivalences} is a category $C$ equipped with a wide subcategory $\cW$, whose maps we call weak equivalences. We can think of the weak equivalences as the maps which are invertible up to homotopy (whatever that may mean in this instance) but not necessarily invertible in $C$. We can then construct the homotopy category $\Ho C$ by freely inverting all the maps in $\cW$. While this category correctly realizes the homotopical structure that we are interested in, it is in general difficult to work with, so we work with it indirectly by considering the pair $(C,\cW)$. We call a functor between categories with weak equivalences which preserves weak equivalences \textbf{homotopical}, and we denote the category of categories with weak equivalences and homotopical functors as $\weCat$.
 
-The category $\weCat$ can itself be though of as a category with weak equivalences, where the weak equivalences are given by Dwyer-Kan equivalences (DK-equivalences). A DK-equivalence is a homotopical functor $F\colon C\to D$, which when we take the hammock localization \cite{DK} $L^H\colon\weCat\to\sCat$, is essentially surjective and $\infty$-full and faithful, i.e. for all $x,y\in L^HC$ the simplicial map
-$$ L^HF_{x,y}\colon L^HC(x,y)\to L^HD(L^HFx,L^HFy) $$
+\begin{rem}
+    The definition above is sometimes used for relative categories, while categories with weak equivalences require $\cW$ to contain all isomorphisms and be closed under 2-out-of-3. For this paper, we just use the term categories with weak equivalences to match \cite{KL18}, where the distinction between the two is not particularly relevant.
+\end{rem}
+
+The category $\weCat$ can itself be though of as a category with weak equivalences, where the weak equivalences are given by Dwyer-Kan equivalences (DK-equivalences). A DK-equivalence is a homotopical functor $F\colon C\to D$, which when we take the simplicial localization  $L\colon\weCat\to\sCat$ (which can be implemented in a number of ways e.g. see \cite{BK}), is essentially surjective and $\infty$-full and faithful, i.e. for all $x,y\in LC$ the simplicial map
+$$ LF_{x,y}\colon LC(x,y)\to LD(LFx,LFy) $$
 is a weak homotopy equivalence (of simplicial sets).
 
-The model of infinity categories that we wish to study is that of a quasicategory.
+Ultimately, we are interested in how categories with weak equivalences can present both homotopy theories and infinity categories, so a natural model of infinity categories for us to use is that of a quasicategory.
 \begin{defn}
     A simplicial set $X$ is called a \textbf{quasicategory} if it satisfies the following lifting property:
     \[\begin{tikzcd}
@@ -74,8 +78,6 @@ All of these notions straightforwardly dualize to coslice categories, colimits, 
     Let $F\colon C\rightleftarrows D\colon\! G$ be simplicial maps between quasicategories and let $\eta\colon C\times\Delta_1\to C$ be such that $\eta|_{C\times\partial\Delta_1}=[1_C,GF]$ and $\varepsilon\colon D\times\Delta_1\to D$ such that $\varepsilon|_{D\times\partial\Delta_1}=[FG,1_D]$. The quadruple $(F,G,\eta,\varepsilon)$ is an \textbf{adjunction of quasicategories} if $(F,G,\eta,\varepsilon)$ is an adjunction in the 2-category $\qCat_2$.
 \end{defn}
 
-
-
 With this we can finally define what it means for a quasicategory to be locally Cartesian closed.
 \begin{defn}
     \begin{enumerate}
@@ -108,9 +110,7 @@ In many cases, one typically has slightly more structure:
     Then the classes $(\cW,\cC,\cF)$ form a left semi-model structure on $\cE$.
 \end{lem}
 
-\note{transition}
-
-
+\subsection{Semantics of Type Theory}
 The models of type theories that we are most interested in is that of contextual categories, as introduced by Cartmell in his thesis \cite{Cartmell}.
 \begin{defn}
     A \textbf{contextual category} is a category $C$ equipped with:
@@ -155,7 +155,7 @@ Essentially algebraic theories differ from algebraic theories in that they allow
     \end{enumerate}
 \end{defn}
 
-The description of contextual categories as models of an essentially algebraic theory provides us with a number of useful tools for working with contextual categories, and so, indirectly with the syntax. For instance, the notion of models given provides us with a natural notion of morphism i.e. functions which preserve all of the operations. In the case of contextual categories we call these morphism \textbf{contextual functors}, and these allow us to construct the category of contextual categories, $\CxlCat$, which, as a category of models of an essentially algebraic theory, must be complete and cocomplete (as a corollary to \cite[Thm. 3.36]{AR}).
+The description of contextual categories as models of an essentially algebraic theory provides us with a number of useful tools for working with contextual categories, and so, indirectly with the syntax. For instance, the notion of models given provides us with a natural notion of morphism i.e. functions which preserve all of the operations. In the case of contextual categories we call these morphism \textbf{contextual functors}, and these allow us to construct the category of contextual categories, $\CxlCat$, which, as a category of models of an essentially algebraic theory, must be locally presentable and thus complete and cocomplete \cite[Thm. 3.36]{AR}.
 
 We wish to additionally equip our contextual categories with structures corresponding to the various forms of type constructors that appear in Martin-L\"of type theory. These include:
 \begin{enumerate}
@@ -177,9 +177,9 @@ The most relevant of these structures to this paper is the $\Id$-type structure.
         $$ f^*\refl_A=\refl_{f^*A},\qquad f^*J_{C,d}=J_{f^*C,f^*d}. $$
     \end{enumerate}
 \end{defn}
-The first three rules of this type structure are meant to mimic the syntactic rules for identity types in our type theory, and the last rule ensures that this structure respects substitution. Similar definitions for unit, Sigma, and Pi type structures can be found in \cite[Appendix B]{KL21}.
+The first three rules of this type structure are meant to mimic the syntactic rules for identity types in our type theory, and the last rule ensures that this structure respects substitution. Similar definitions for unit, Sigma, and (extensional) Pi-type structures can be found in \cite[Appendix B]{KL21}.
 
-Each of these structures extend the essentially algebraic theory of contextual categories and thus also have a natural notion of morphism, preserving the corresponding structures. We denote the category of contextual categories with identity, unit, Sigma, and extensional Pi type structures by $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
+Each of these structures extend the essentially algebraic theory of contextual categories and thus also have a natural notion of morphism, preserving the corresponding structures. We denote the category of contextual categories with identity, unit, Sigma, and extensional Pi-type structures by $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
 
 Following \cite[Prop. 3.3.1]{Garner}, we can extend the notion of $\Id$-type structures to \textbf{identity contexts}. Specifically, given $\Gamma\in C$ and a context extension $\Gamma.\Delta\in C$, we can further construct a context extension $\Gamma.\Delta.p_\Delta^*\Delta.\Id_\Delta$ which comes equipped with reflexivity map and an elimination term which directly generalize those of the $\Id$-type structure on a single type. This is essentially a notational issue which helps use define a notion of homotopies within our contextual categories.
 
@@ -233,7 +233,7 @@ These will make up the class $\cW$ of our left semi-model structure. The remaini
     We now define the \textbf{trivial fibrations}, $\cT\cF$, as the right lifting class of $I$, the \textbf{cofibrations}, $\cC$, as the left lifting class of $\cT\cF$, the \textbf{fibrations}, $\cF$, as the right lifting class of $J$, and the \textbf{anodyne maps}, $\cA$, as the left lifting class of $\cF$.
 \end{defn}
 
-By the small object argument \cite{Quillen} \note{check smallness}, we get:
+By the small object argument \cite{Quillen}, we get:
 \begin{prop}
     $(\cC,\cT\cF)$ and $(\cA,\cF)$ are both weak factorization systems.
 \end{prop}
@@ -248,15 +248,56 @@ These classes of maps satisfy the hypotheses of \ref{lem:semi-model struct}, pro
     The classes $\cW,\cC,\cF$ above form a left semi-model structure on the category $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
 \end{thm}
 \begin{sketch}
-    We show that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ satisfies the hypotheses of \ref{lem:semi-model struct}. As noted before, we know that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ is bicomplete, as a category of models of an essentially algebraic theory, and as we saw above, we have two weak factorization systems, $(\cC,\cT\cF)$ and $(\cA,\cF)$, constructed with the small objects argument. Showing that the class $\cW$ satisfies the right closure properties and that $\cT\cF=\cF\cap\cW$ are straight forward arguments, so the bulk of the work that is required is in showing that maps with cofibrant source are anodyne exactly when they are both cofibrations and weak equivalences.
+    We show that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ satisfies the hypotheses of \ref{lem:semi-model struct}. As noted before, we know that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ is bicomplete, as a category of models of an essentially algebraic theory, and as we saw above, we have two weak factorization systems, $(\cC,\cT\cF)$ and $(\cA,\cF)$, constructed with the small objects argument. Showing that the class $\cW$ satisfies the right closure properties and that $\cT\cF=\cF\cap\cW$ are straightforward arguments, so the bulk of the work that is required is in showing that maps with cofibrant source are anodyne exactly when they are both cofibrations and weak equivalences.
 
     First off, the inclusion $\cA\subseteq\cC$ follows dually from the fact that $\cT\cF\subseteq\cF$, which is immediate from their construction.
+
+    The rest of the proof makes use of a construction that is almost a path object (examined in generality in \cite{KL21b}, and defined in more specificity in \cite[Def. 5.5]{KL18}), whose specifics we will mostly black-box for the sake of brevity. Given a contextual category $C$ with $\Id$-types, we can construct the contextual category of \textbf{span-equivalences} $C^{\eqv}$, which in turn allows us to define a notion of \textbf{right homotopy} between maps $F_0,F_1\colon C\to D$ in $\CxlCat$ when they factor through $D^{\eqv}$ in the following diagram:
+    \[\begin{tikzcd}
+            &  & D^{\text{eqv}} \arrow[d, "{(P_0,P_1)}", two heads] \\
+        C \arrow[rr, "{(F_0,F_1)}"] \arrow[rru, "H", bend left] &  & D\times D                                         
+    \end{tikzcd},\]
+    where the maps $P_0,P_1$ are projections that come with the span-equivalence construction and which are trivial fibrations \cite[Prop. 4.13.3, Prop. 5.12]{KL18}. For $C$ cofibrant, this notion of right homotopy, denoted $F_0\sim_r F_1$, is an equivalence relation \cite[Prop. 6.3]{KL18}.
+
+    Returning to the proof, if we now assume $\cA\subseteq\cW$ and $j\colon A\to B$ is anodyne with $A$ cofibrant, then by the fibrancy of $A$, our lifting properties give us a retraction in the following diagram:
+    \[\begin{tikzcd}
+        A \arrow[r, "1_A"] \arrow[d, "j"] & A \arrow[d, two heads]\\
+        B \arrow[ur, dashed, "r"] \arrow[r] & 1
+    \end{tikzcd}.\]
+    But then $r$ is also a homotopy section of $j$, by filling the following square:
+    \[\begin{tikzcd}
+        A \arrow[r, "c_j"] \arrow[d, "j"] & B^{\eqv} \arrow[d, two heads]\\
+        B \arrow[ur, dashed, "H"] \arrow[r, "{(1_B, jr)}"'] & B\times B
+    \end{tikzcd},\]
+    where $c_j$ is the reflexivity homotopy on $j$, supplied by right homotopies being an equivalence relation when the source is cofibrant. We now have that $rj=1_A$, and $jr\sim_r1_B$, so by 2-out-of-6 and the fact that weak equivalences are closed under right homotopies \cite[Prop. 6.5]{KL18}, we get that $j\in\cW$ as desired.
+
+    Now suppose that $j\colon A\to B$ is in $\cW$ and $\cC$ with $A$ cofibrant. We wish to show that $j$ lifts against all fibrations. Note that it is enough to show this for fibrations over $B$, as fibrations are closed under pullbacks, so assume with have the following square that we wish to find a filler for:
+    \[\begin{tikzcd}
+        A \arrow[r, "h"] \arrow[d, tail, "j", "\sim"'] & Y \arrow[d, two heads, "p"]\\
+        B \arrow[r, "1_B"] & B
+    \end{tikzcd}.\]
+
+    Using the reflexivity homotopy $c_h\colon A\to Y^{\eqv}$ for $h$, we can factor it through the pullback with the following diagram:
+    \[\begin{tikzcd}
+            & {(h,1_Y)^*Y^{\eqv}} \arrow[r] \arrow[d, two heads, "{(Q_0,Q_1)}"] \arrow[dr, phantom, "\lrcorner", pos=0] & Y^{\eqv} \arrow[d, two heads, "{(P_0,P_1)}"]\\
+        A \arrow[ur, "c_h'"] \arrow[r, "{(1_A,h)}"] \arrow[dr, "1_A"'] & A\times Y \arrow[r, "{(h,1_Y)}"] \arrow[d, two heads, "\pi_0"] \arrow[dr, phantom, "\lrcorner", pos=0.1] & Y\times Y \arrow[d, two heads, "\pi_0"]\\
+            & A \arrow[r, "h"] & Y
+    \end{tikzcd}.\]
+    Since $Q_0$ is a pullback of the trivial fibration $P_0$, it is a trivial fibration as well, so by 2-out-of-3, $c_h'$ is an equivalence since $Q_0c_h'=1_A$. Similarly, $pQ_1$ is an equivalence since $pQ_1c_h'=ph=j$.
+
+    However, since $pQ_1$ is also a fibration, it is a trivial fibration, so (since $j$ is a cofibration) we get a filler in the left square of the following diagram:
+    \[\begin{tikzcd}
+        A \arrow[r, "c_h'"'] \arrow[rr, bend left, "h"] \arrow[d, tail, "j"'] & {(h,1_Y)^*Y^{\eqv}} \arrow[r, "Q_1"'] \arrow[d, two heads, "pQ_1", "\sim"'] & Y \arrow[d, two heads, "p"]\\
+        B \arrow[ur, dashed] \arrow[r, "1_B"'] & B \arrow[r, "1_B"'] & B
+    \end{tikzcd}.\]
+    Composing this lift with $Q_1$ then gives us the desired lift in the original square. This completes the proof that maps with cofibrant sources are anodyne exactly when they are cofibrations and weak equivalences, so we have satisfied the hypotheses of \ref{lem:semi-model struct}, and so constructed a left semi-model structure on $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
 \end{sketch}
-\note{proof sketch}
 
 \section{Conjecture}
 
-With our syntax given by contextual categories and semantics given by quasicategories, we finally have the background to start discussing the conjecture which is the primary motivation of this research. We saw previously that each contextual category has an underlying category with weak equivalences, giving us an inclusion $\CxlCat\to\weCat$. It is known that the categories $\weCat$ and $\qCat$ are DK-equivalent as categories with weak equivalences. We will call this equivalence $\Ho_\infty$ and note that it can be implemented in a number of ways (see \cite[$\S1.6$]{Barwick}), but, for concreteness, we will take it to be hammock localization followed by fibrant replacement and the homotopy coherent nerve, following \cite{KL18}. We can then define the map $\Cl_\infty$ as the following composite:
+With our syntax given by contextual categories and semantics given by quasicategories, we finally have the background to start discussing the conjecture which is the primary motivation of this research. We saw previously that each contextual category has an underlying category with weak equivalences, giving us an inclusion $\CxlCat\to\weCat$. It is known that the categories $\weCat$ and $\qCat$ are DK-equivalent as categories with weak equivalences. We will call this equivalence $\Ho_\infty$ and note that it can be implemented in a number of ways (see \cite[$\S1.6$]{Barwick}), but, for concreteness, we can consider the following localization construction which takes a category with weak equivalences $(C,\cW)$, takes the pushout of the span
+$$ \coprod_{w\in\cW}E[1]\leftarrow\coprod_{w\in\cW}\Delta^1\to NC $$
+in $\sSet$ ($NC$ is the nerve of $C$), and takes a fibrant replacement in the Joyal model structure. We can then define the map $\Cl_\infty$ as the following composite:
 \[\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}\xrightarrow{\quad}\weCat\xrightarrow{\Ho_\infty}\qCat.\]
 \cite{Kapulkin} shows us that this functor is homotopical and valued in $\LCCC_\infty$.
 \begin{thm}\cite[Thm. 5.8]{Kapulkin}
@@ -338,9 +379,12 @@ The necessitation of $\cM$ satisfying the slightly stronger hypotheses of \ref{l
 \begin{lem}
     Suppose $\cM$ is a category which satisfies the hypotheses of \ref{lem:semi-model struct}. A pushout of a trivial cofibration with cofibrant source along a cofibration in $\cM$ is a trivial cofibration.
 \end{lem}
+\begin{proof}
+    A trivial cofibration with cofibrant source must be in the class $\cA$, which is the left class of a weak factorization system, and so is closed under pushouts. Since this pushout is being taken along a cofibration, the pushout is a map in $\cA$ with a cofibrant source, and thus is a trivial cofibration.
+\end{proof}
 
 \begin{sketch}
-    The proof mostly follows from standard inductive arguments using the Reedy structure of $\cR$ (see \cite[Ch. 15]{Hirshhorn}, \cite[Ch. 9]{RadulescuBanu}).
+    (Theorem \ref{thm:reedy left-semi model struct}) The proof mostly follows from standard inductive arguments using the Reedy structure of $\cR$ (see \cite[Ch. 15]{Hirshhorn}, \cite[Ch. 9]{RadulescuBanu}).
 
     For the inductive step of lifting a Reedy trivial cofibration with cofibrant source $A\overset{\sim}{\rightarrowtail}B$, against a Reedy fibration $X\twoheadrightarrow Y$. By \cite[15.2.11]{Hirshhorn} (note: this is the lemma which motivates the definition of Reedy (co)fibrations) all that is necessary is to construct a lift in the following diagram:
     \[\begin{tikzcd}
