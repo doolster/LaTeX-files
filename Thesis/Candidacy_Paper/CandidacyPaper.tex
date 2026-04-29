@@ -5,7 +5,7 @@
 
 \captionsetup{justification = centering}
 
-\title{TITLE}
+\title{Towards a Nerve of Type Theories}
 \author{Zack Dooley}
 \date{}
 
@@ -13,9 +13,55 @@
 \maketitle
 
 \section{Introduction}
-syntax/semantics for type theory/higher cat. theory, history
+\note{clean up}
+Dependent type theory is an alternative foundation for mathematics in which the basic judgments are not only that a term has a type, but that a type itself may depend on a surrounding context of assumptions. In the fragment we reference throughout this paper, a typical judgment has the form
+\[ \Gamma\vdash A\ \text{type}\qquad\text{or,}\qquad\Gamma\vdash a : A, \]
+where $\Gamma$ is a context, i.e. a list of typed variables $\Gamma=(x_1:X_1,\dots,x_n:X_n)$. The basic structural rules of type theory can be extended by the inclusion of type formation rules \note{is this the right term?} which allow us access to various constructions within our theory such as a unit type, denoted 1, dependent pair and function types, called $\Sigma$ and $\Pi$ types respectively, or the type of identities on a given type. These constructions are asserted by adding rules such as the following for $\Id$-types to our theory.
 
-Introduce necessary syntax, say something about the choice to not study syntax directly, syntactic category of a tt, initiality?
+\[
+\begin{array}{c@{\qquad}c}
+    \inferrule*[Right=Id-FORM]
+    {\Gamma\vdash A\ \text{type}}
+    {\Gamma, x,y:A \vdash \Id_A(x,y)\ \text{type}}
+    &
+    \inferrule*[Right=Id-INTRO]
+    {\Gamma\vdash A\ \text{type}}
+    {\Gamma, x:A \vdash \refl_A(x) : \Id_A(x,x)}
+    \\[2.5ex]
+    \multicolumn{2}{c}{
+        \inferrule*[Right=Id-ELIM]
+        {\Gamma, x,y:A, u:\Id_A(x,y) \vdash C(x,y,u)\ \text{type} \\
+        \Gamma, z:A \vdash d(z) : C(z,z,\refl_A(z))}
+        {\Gamma, x,y:A, u:\Id_A(x,y) \vdash J_{z.d}(x,y,u) : C(x,y,u)}
+    }
+    \\[2.5ex]
+    \multicolumn{2}{c}{
+        \inferrule*[Right=Id-COMP]
+        {\Gamma, x,y:A, u:\Id_A(x,y) \vdash C(x,y,u)\ \text{type} \\
+        \Gamma, z:A \vdash d(z) : C(z,z,\refl_A(z))}
+        {\Gamma, x:A \vdash J_{z.d}(x,x,\refl_A(x)) = d(x) : C(x,x,\refl_A(x))}
+    }
+\end{array}
+\]
+
+A presentation for the structural rules of Martin-L\"of Type Theory (MLTT), which is what we will consider to be the most "basic" dependent type theory, along with the rules for other common type constructors can be found in \cite[Appendix A]{KL21}.
+
+A central part of the value of dependent type theory is that it naturally admits a syntax-semantics relationship with category theory. On the syntactic side, contexts and substitutions naturally organize into a category we call the syntactic category of a type theory whose objects are contexts and whose morphisms, from a context $\Gamma$ to a context $\Delta$, are lists of terms of the types in $\Delta$ in the context $\Gamma$. On the other side, we can get a type theory by considering the internal logic of a category with sufficient structure.
+
+This syntax-semantics relationship has been well studied in a variety of contexts where it has been shown that the presence of certain logical structures within a theory corresponds to certain categorical constructions. An example of this relevant to the current paper is the relationship between locally Cartesian closed categories and MLTT with extensional identity types (meaning identity types with trivial higher structure). This result was formally made as an equivalence of the 2-categories of locally Cartesian closed categories and of a certain class of semantic models of extensional MLTT \cite{CD}. The purpose of this paper is to explain the conjectured equivalence one would get when allowing for the higher structure naturally present in our identity types, which should correspond to higher categorical structure on the semantic side.
+
+As briefly referenced in the previously noted result, when studying type theories, we often do not study the syntax directly, but rather, we consider semantics models which closely model the structures that we find present in the syntactic categories of type theories.
+
+
+Rather than studying the syntax of dependent type theory in isolation, this paper emphasizes semantic models such as contextual categories. A contextual category is a categorical abstraction of the syntactic category of a type theory: it encodes contexts, types in context, terms as sections, and substitution in a purely algebraic way. Studying these semantic models has several advantages:
+- it gives an invariant notion of model independent of the particular presentation of syntax;
+- it produces a category of models with natural morphisms between them, which is essential for comparing theories and constructing homotopies;
+- it makes available categorical tools such as limits, adjoints, and model structures that are hard to see directly in raw syntax;
+- it isolates the structural content of the theory from the bureaucratic details of derivations and proof-term representations.
+
+%In particular, contextual categories can be described as models of an essentially algebraic theory, so the collection of all such models forms a well-behaved category.  This allows us to study type theories by studying their semantics directly, rather than by manipulating syntactic derivations.  When we pass to homotopical questions, this semantic perspective becomes even more important, because it lets us equip the category of models with a notion of weak equivalence and to relate type-theoretic equivalence to categorical equivalence.
+
+The remainder of the paper therefore begins by fixing the minimal syntax and notation needed for our arguments, then explains how extensional dependent type theory corresponds to locally cartesian closed structure, and finally develops the semantic framework of contextual categories as the primary objects of study. This sets the stage for the later sections, where we build homotopical models and compare them with the syntactic presentations they are meant to represent.
 
 \section{Background}
 
@@ -162,7 +208,7 @@ We wish to additionally equip our contextual categories with structures correspo
     \item Identity types (denoted $\Id$);
     \item unit types (1);
     \item dependent sum or Sigma types ($\Sigma$);
-    \item dependent function of Pi types, with function extensionality ($\Pi_{\ext}$).
+    \item dependent function or Pi types, with function extensionality ($\Pi_{\ext}$).
 \end{enumerate}
 The most relevant of these structures to this paper is the $\Id$-type structure.
 \begin{defn}
