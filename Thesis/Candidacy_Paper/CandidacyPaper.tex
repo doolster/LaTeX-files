@@ -13,9 +13,9 @@
 \maketitle
 
 \section{Introduction}
-Type theory is a foundation for mathematics which formalizes, and notably differentiates, the notion of mathematical terms, say the number 2 or a function $f$, and the types which those terms belong to, say the natural numbers or functions $\N\to\N$. Dependent type theory is then a type theory in which the basic judgments are not only that a term has a type, but that a type itself may depend on a surrounding context of assumptions. In the fragment we reference throughout this paper, a typical judgment has the form
+Type theory is a foundation for mathematics which formalizes the notion of mathematical terms, say the number 2 or a function $f$, and the types which those terms belong to, say the natural numbers or functions $\N\to\N$. Dependent type theory is then a type theory in which the basic judgments are not only that a term has a type, but that a type itself may depend on a surrounding context of assumptions. In the fragment we reference throughout this paper, a typical judgment has the form
 \[ \Gamma\vdash A\ \text{type}\qquad\text{or,}\qquad\Gamma\vdash a : A, \]
-where $\Gamma$ is a context, i.e. a list of typed variables $\Gamma=(x_1:X_1,\dots,x_n:X_n)$, and $a$ or $A$ may implicitely depend on the variables $x_i$. The basic structural rules of type theory can be extended by the inclusion of type constructors which allow us access to various constructions within our theory such as a unit type, denoted 1, dependent pair and function types, called $\Sigma$ and $\Pi$ types respectively, or the type of identities on a given type. These constructions are asserted by adding rules such as the following for $\Id$-types to our theory.
+where $\Gamma$ is a context, i.e. a list of typed variables $\Gamma=(x_1:X_1,\dots,x_n:X_n)$, and $a$ or $A$ may implicitly depend on the variables $x_i$. The basic structural rules of type theory can be extended by the inclusion of type constructors which allow us access to various constructions within our theory such as a unit type, denoted 1, dependent pair and function types, called $\Sigma$ and $\Pi$ types respectively, or the type of identities on a given type. These constructions are asserted by adding rules to our theory such as the following for $\Id$-types.
 
 \[
 \begin{array}{c@{\qquad}c}
@@ -45,11 +45,11 @@ where $\Gamma$ is a context, i.e. a list of typed variables $\Gamma=(x_1:X_1,\do
 
 These rules individually tell us how to form a type, how to introduce and eliminate terms of that type, and how those introduction and elimination rules should compute with one another. A presentation for the structural rules of Martin-L\"of Type Theory (MLTT), along with the rules for other common type constructors can be found in \cite[Appendix A]{KL21}.
 
-A central value of dependent type theory is that it naturally admits a syntax-semantics relationship with category theory. On the syntactic side, contexts and substitutions naturally organize into a category we call the syntactic category of a type theory whose objects are contexts and whose morphisms from a context $\Gamma$ to a context $\Delta$, are lists of terms of the types in $\Delta$ derived in the context $\Gamma$. On the other side, we can get a type theory by considering the internal logic of a category with sufficient structure.
+A valuable aspect of dependent type theory is that it naturally admits a syntax-semantics relationship with category theory. On the syntactic side, contexts and substitutions naturally organize into a category we call the \textbf{syntactic category} of a type theory, whose objects are contexts and whose morphisms, from a context $\Gamma$ to a context $\Delta$, are lists of terms of the types in $\Delta$ derived in the context $\Gamma$. On the other side, we can get a type theory by considering the internal logic of a category with sufficient structure.
 
 This syntax-semantics relationship has been well studied in a variety of contexts where it has been shown that the presence of certain logical structures within a theory corresponds to certain categorical constructions. An example of this relevant to the current paper is the relationship between locally Cartesian closed categories and MLTT with extensional identity types (meaning identity types with trivial higher structure). This result was formally made as an equivalence of the 2-categories of locally Cartesian closed categories and of a certain class of semantic models of extensional MLTT \cite{CD}. The purpose of this paper is to explain the conjectured equivalence one would get when allowing for the higher structure naturally present by iterating identity types, which should correspond to higher categorical structure on the semantic side.
 
-As briefly referenced in the previously noted result, when studying type theories, we often do not study the syntax directly, but rather, we consider semantics models which closely represent the structures that we find present in the syntactic categories of type theories. Studying these semantic models has several advantages:
+As briefly referenced in the previously noted result, when studying type theories, we often do not study the syntax directly, but rather, we consider semantic models which closely represent the structures that we find present in the syntactic categories of type theories. Studying these semantic models has several advantages:
 \begin{itemize}
     \item it produces a category of models with natural morphisms between them, which is essential for comparing theories and constructing a notion of homotopy;
     \item it makes available categorical tools such as (co)limits, adjoints, and homotopy theoretic constructions that can be hard to see directly in raw syntax; and
@@ -64,12 +64,12 @@ The rest of the paper will then setup the necessary abstract homotopy theory tha
 One of the simplest ways to realize an abstract notion of homotopy theory is through categories with weak equivalences. A \textbf{category with weak equivalences} is a category $C$ equipped with a wide subcategory $\cW$, whose maps we call weak equivalences. We can think of the weak equivalences as the maps which are invertible up to homotopy (whatever that may mean in this context) but not necessarily invertible in $C$. We can then construct the homotopy category $\Ho C$ by freely inverting all the maps in $\cW$. While this category correctly realizes the homotopical structure that we are interested in, it is in general difficult to work with, so we work with it indirectly by considering the pair $(C,\cW)$. We call a functor between categories with weak equivalences which preserves weak equivalences \textbf{homotopical}, and we denote the category of categories with weak equivalences and homotopical functors as $\weCat$.
 
 \begin{rem}
-    The definition for categories with weak equivalences given above is sometimes used for relative categories, while categories with weak equivalences require $\cW$ to contain all isomorphisms and be closed under 2-out-of-3. For this paper, we just use the term categories with weak equivalences to match \cite{KL18}, where the distinction between these two terms is not particularly relevant.
+    The definition for categories with weak equivalences given above is sometimes used for relative categories, while categories with weak equivalences often require $\cW$ to contain all isomorphisms and be closed under 2-out-of-3. For this paper, we just use the term categories with weak equivalences to match \cite{KL18}, where the distinction between these two terms is not particularly relevant.
 \end{rem}
 
-The category $\weCat$ can itself be though of as a category with weak equivalences, where the weak equivalences are given by Dwyer-Kan equivalences (DK-equivalences). A DK-equivalence is a homotopical functor $F\colon C\to D$, which when we take the simplicial localization $L\colon\weCat\to\sCat$ (which can be implemented in a number of ways e.g. see \cite{BK}), it descends to an equaivalence of homotopy categories and is $\infty$-full and faithful, i.e. for all $x,y\in LC$ the simplicial map
+The category $\weCat$ can itself be though of as a category with weak equivalences, where the weak equivalences are given by Dwyer-Kan equivalences (DK-equivalences). A DK-equivalence is a homotopical functor $F\colon C\to D$, which when we take the simplicial localization $L\colon\weCat\to\sCat$ (which can be implemented in a number of ways e.g. see \cite{BK}), it descends to an equivalence of homotopy categories and is $\infty$-full and faithful, i.e. for all $x,y\in LC$ the simplicial map
 $$ LF_{x,y}\colon LC(x,y)\to LD(LFx,LFy) $$
-is a weak homotopy equivalence (of simplicial sets). This definition is supposed to, in a sence, tell us that $C$ and $D$ encode the same homotopy theory i.e. they have the same objects (up to homtopy equivalence) and the spaces of maps between objects are equivalent.
+is a weak homotopy equivalence (of simplicial sets). This definition is supposed to, in a sense, tell us that $C$ and $D$ encode the same homotopy theory i.e. they have the same objects (up to homotopy equivalence) and the spaces of maps between objects are equivalent.
 
 Ultimately, we are interested in how categories with weak equivalences can present both homotopy theories and infinity categories, so a natural model of infinity categories for us to use is that of a quasicategory.
 \begin{defn}
@@ -83,9 +83,9 @@ Ultimately, we are interested in how categories with weak equivalences can prese
 
 We denote the full subcategory of $\sSet$ spanned by quasicategories by $\qCat$. We additionally write $\tau_1\colon\sSet\to\Cat$ for the adjoint to the nerve functor, and we let $\qCat_2$ denote the 2-category of quasicategories, where the hom-categories are given by $\qCat_2(C,D):=\tau_1(D^C)$.
 
-To study the homotopy theory of quasicategories, we need a notion of weak equivalences which will be given by categorical equivalences of quasicategories. To define these, we first establish the notion of an $E[1]$-homotopy, where $E[1]$ is the nerve of the contractible groupoid on two objects.
+To study the homotopy theory of quasicategories, we need a notion of weak equivalences which will be given by categorical equivalences of quasicategories. To define these, we first establish the notion of an $E[1]$-homotopy, where $E[1]$ denotes the simplicial set given by the nerve of the contractible groupoid on two objects.
 \begin{defn}
-    Two maps $f,g\colon X\to Y$ of simplicial sets are $E[1]$-\textbf{homotopic}, denoted $f\sim g$, if there exists a simplicial map $H\colon X\times E[1]\to Y$ whose restriction to $X\times\partial\Delta_1$ is $[f,g]$. A map $f\colon X\to Y$ is then a \textbf{categorical equivalence} if there exists a map $g\colon Y\to X$ such that $fg\sim1_Y$ and $gf\sim1_X$.
+    Two maps $f,g\colon X\to Y$ of simplicial sets are $E[1]$-\textbf{homotopic}, denoted $f\sim_{E[1]} g$, if there exists a simplicial map $H\colon X\times E[1]\to Y$ whose restriction to $X\times\partial\Delta_1$ is $[f,g]$. A map $f\colon X\to Y$ is then a \textbf{categorical equivalence} if there exists a map $g\colon Y\to X$ such that $fg\sim_{E[1]}1_Y$ and $gf\sim_{E[1]}1_X$.
 \end{defn}
 With this we now have some notion of a homotopy theory on the semantic side of our argument. However, we are not just interested in infinity categories in general. At the core of the relationship between type theories and categories is the notion that the presence of type constructors on a theory should correspond to imposing more categorical structure on the semantic side. In the case that we are interested in, the categorical structure that we expect is that of a locally Cartesian closed infinity category, a notion analogous to that of a locally Cartesian closed category, but requires some setup for our particular choice of model.
 
@@ -130,7 +130,7 @@ With this we can finally define what it means for a quasicategory to be locally 
 \end{defn}
 We denote the subcategory of $\qCat$ spanned by locally Cartesian closed quasicategories and locally Cartesian closed functors as $\LCCC_\infty$.
 
-With this, we have fully defined the semantic side of our proposed syntax-semantics relationship, but we still need a bit more homotopy theory in order to study the homotopical aspects of our type theories. To do this, we introduce a slightly weakened version of a model category:
+With this, we have fully defined the semantic side of our proposed syntax-semantics relationship, but we still need a bit more homotopy theory in order to study the homotopical aspects of our type theories. To do this, we introduce a slightly weakened version of a model structure:
 \begin{defn}\cite[Def. 6.6]{KL18}
     A \textbf{left semi-model structure} on a bicomplete category $\cE$ consists of three classes of maps $\cW,\cF,\cC$, subject to the axioms:
     \begin{enumerate}
@@ -140,7 +140,7 @@ With this, we have fully defined the semantic side of our proposed syntax-semant
         \item every map can be functorially factored as a cofibration followed by trivial fibration, and every map with a cofibrant source can be functorially factored as a trivial cofibration followed by a fibration.
     \end{enumerate}
 \end{defn}
-One should compare this defintiion to that of a model category, where we have two weak factorization systems $(\cC,\cF\cap\cW)$ and $(\cC\cap\cW,\cF)$. In a left semi-model structure, we still have the first factorization system, but the later is weakened to only consider maps with cofibrant source. As it turns out, much of the machinery of model categories can be leveraged even if we are in this slightly weaker setting, and the existence of a full model structure on contextual categories is unknown, so this is the structure that we will use.
+One should compare this definition to that of a model category, where we have two weak factorization systems $(\cC,\cF\cap\cW)$ and $(\cC\cap\cW,\cF)$. In a left semi-model structure, we still have the first factorization system, but the later is weakened to only consider maps with cofibrant source. As it turns out, much of the machinery of model categories can be leveraged even if we are in this slightly weaker setting, and the existence of a full model structure on contextual categories is unknown, so this is the structure that we will use.
 
 In many cases, one typically has slightly more structure:
 \begin{lem}\cite[Lem. 6.7]{KL18}\label{lem:semi-model struct}
@@ -155,10 +155,10 @@ In many cases, one typically has slightly more structure:
 \end{lem}
 Again, we can compare these hypotheses to that of a model category and a left semi-model category and see that we now have two weak factorization systems, which makes classifying maps a little easier, but the anodyne maps (i.e. the maps in $\cA$) still don't quite match up with the trivial cofibrations.
 
-This finally sets us up with all the theory we need to study the homotopical structure of our type theories, but before we establish the left semi-model structure on contextual categories, we first need to set up exactly how we will be studying the syntax side of our realtionship.
+This finally sets us up with all the theory we need to study the homotopical structure of our type theories, but before we establish the left semi-model structure on contextual categories, we first need to set up exactly how we will be studying the syntax side of the relationship.
 
 \subsection{Semantics of Type Theory}
-As we explained before, we don't want to actually work directly with the syntax for a number of reasons, so the models of type theories that we will be working with is that of contextual categories, as introduced by Cartmell in his thesis \cite{Cartmell}.
+As we explained before, we don't want to work directly with the syntax for a number of reasons, so the models of type theories that we will be working with is that of contextual categories, as introduced by Cartmell in his thesis \cite{Cartmell}.
 \begin{defn}
     A \textbf{contextual category} is a category $C$ equipped with:
     \begin{enumerate}
@@ -225,9 +225,13 @@ The most relevant of these structures to this paper is the $\Id$-type structure.
         $$ f^*\refl_A=\refl_{f^*A},\qquad f^*J_{C,d}=J_{f^*C,f^*d}. $$
     \end{enumerate}
 \end{defn}
-The first three rules of this type structure are meant to mimic the syntactic rules for identity types in our type theory, and the last rule ensures that this structure respects substitution. Similar definitions for unit, Sigma, and (extensional) Pi-type structures can be found in \cite[Appendix B]{KL21}.
+The first three rules of this type structure are meant to mimic the identity type constructor rules in our type theory, and the last rule ensures that this structure respects substitution. Similar definitions for unit, Sigma, and (extensional) Pi-type structures can be found in \cite[Appendix B]{KL21}.
 
 Each of these structures extend the essentially algebraic theory of contextual categories and thus also have a natural notion of morphism, preserving the corresponding structures. We denote the category of contextual categories with identity, unit, Sigma, and extensional Pi-type structures by $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
+
+\begin{rem}
+    All of the homotopy theoretic constructions that we will be using will only require $\Id$-type structures on our contextual categories, so if we wished, we could work within $\CxlCat_{\Id}$ and port our work up to $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ using the natural free-forgetful adjunction that comes from extending the essentially algebraic theories. However, as we are only interested in the category $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ in this paper, and working in this extension does not meaningfully complicate anything, we will work in slightly less generality.
+\end{rem}
 
 Following \cite[Prop. 3.3.1]{Garner}, we can extend the notion of $\Id$-type structures to \textbf{identity contexts}. Specifically, given $\Gamma\in C$ and a context extension $\Gamma.\Delta\in C$, we can further construct a context extension $\Gamma.\Delta.p_\Delta^*\Delta.\Id_\Delta$ which comes equipped with reflexivity map and an elimination term which directly generalize those of the $\Id$-type structure on a single type. This is essentially a notational issue which helps us define a notion of homotopies within our contextual categories.
 \begin{defn}
@@ -241,26 +245,10 @@ With this we can define a notion of equivalence within a contextual category to 
     
     A \textbf{structured equivalence} $w\colon\Gamma\simeq\Delta$ consists of a map $f\colon\Gamma\to\Delta$, along with maps $g_1,g_2\colon\Delta\to\Gamma$ and homotopies $\eta\colon fg_1\sim1_\Delta$ and $\varepsilon\colon g_2f\sim1_\Gamma$.
     
-    An \textbf{equivalence} $\Gamma\xrightarrow{\sim}\Delta$ in $C$ is a map $f\colon\Gamma\Delta$ for which there exists some $g_1,g_2,\eta,\varepsilon$ making it a structured equivalence.
+    An \textbf{equivalence} $\Gamma\xrightarrow{\sim}\Delta$ in $C$ is a map $f\colon\Gamma\to\Delta$ for which there exists some $g_1,g_2,\eta,\varepsilon$ making it a structured equivalence.
 \end{defn}
 
-With this definition of equivalence we can see that contextual categories have an underlying category with weak equivalences (which is in fact even a fibration category \cite[Thm. 3.2.5]{AKL}). Identifying this underlying structure is the first crucial step in studying the homotopical semantics of our type theories.
-
-Our description of contextual categories as models of an essentially algebraic theory additionally provide us with the important ability to define contextual categories by generators and relations, and in particular lets us define freely generated contextual categories.
-\begin{defn}
-    We define the following freely generated objects in $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$:
-    \begin{enumerate}
-        \item $\gen{\Gamma_n}$ is freely generated by a context of length $n$;
-        \item $\gen{\Gamma_n\vdash A}$ is freely generated by a context $\Gamma$ of length $n$, and a type $A$ in context $\Gamma$;
-        \item $\gen{\Gamma_n\vdash a:A}$ is freely generated by a context $\Gamma$, and a type $A$ and a term $a:A$ in context $\Gamma$, i.e. a section of $p_A$;
-        \item $\gen{\Gamma_n\vdash A\simeq A'}$ is freely generated by a context $\Gamma$, types $A,A'$ in context $\Gamma$, and maps $f,g_l,g_r,\alpha_l,\alpha_r$ constituting an equivalence from $A$ to $A'$ over $\Gamma$; and
-        \item $\gen{\Gamma_n\vdash e:\Id_A(a,a')}$ is freely generated by $\Gamma$ and $A$, as in $\gen{\Gamma_n\vdash A}$, and a section to the projecting map $\Gamma.A.(p_A)^*A.\Id_A\to\Gamma.A$, giving the three terms $a,a'$, and $e$.
-    \end{enumerate}
-\end{defn}
-Note that our use of the phase "freely generated" is perhaps a bit misleading, as these are not all freely generated objects of the theory of contextual categories. Since terms of the theory correspond to sections, these objects must involve some relations. Calling these objects "freely generated" emphasizes their role in relation to their corresponding syntactic objects.
-\note{move or add transition to above section?}
-
-With this we can define the classes of maps that will make up the left semi-model structure on $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$, which will provide us with a homotopical interpretation in service of constructing a semantics.
+With this definition of equivalence we can see that contextual categories have an underlying category with weak equivalences (which is in fact even a fibration category \cite[Thm. 3.2.5]{AKL}). We additionally use these equivalences to define a weak equivalence of contextual categories (note that we have moved up a level from looking at a single contextual category as a category with weak equivalences to looking at $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ as a category with weak equivalences).
 \begin{defn}
     A map $F\colon C\to D$ of contextual categories with $\Id$-types is a \textbf{type-theoretic equivalence} if it satisfies:
     \begin{enumerate}
@@ -268,7 +256,24 @@ With this we can define the classes of maps that will make up the left semi-mode
         \item \textbf{weak term lifting}: for any $\Gamma\in C$, $A\in\Ty(\Gamma)$, and $a\in\Tm(FA)$, there exists a term $\bar{a}\in\Tm(A)$ along with an identity $e\in\Tm(\Id_{FA}(F\bar{a},a)$.
     \end{enumerate}
 \end{defn}
-These will make up the class $\cW$ of our left semi-model structure. The remaining classes will be cofibrantly generated from the following sets of maps.
+The type-theoretic equivalences will make up the class $\cW$ of our left semi-model structure.
+
+The rest of our classes of maps, and their associated weak factorization systems, which will make up our left semi-model structure, will be cofibrantly generated using the small object argument \cite{Quillen}. To describe the generating cofibrations/anodyne maps, we first need to construct certain freely generated contextual categories. This is possible by our description of contextual categories as models of an essentially algebraic theory.
+\begin{defn}
+    We define the following freely generated objects in $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$:
+    \begin{enumerate}
+        \item $\gen{\Gamma_n}$ is freely generated by a context of length $n$;
+        \item $\gen{\Gamma_n\vdash A}$ is freely generated by a context $\Gamma$ of length $n$, and a type $A$ in context $\Gamma$;
+        \item $\gen{\Gamma_n\vdash a:A}$ is freely generated by a context $\Gamma$, a type $A$, and a term $a:A$ in context $\Gamma$, i.e. a section of $p_A$;
+        \item $\gen{\Gamma_n\vdash A\simeq A'}$ is freely generated by a context $\Gamma$, types $A,A'$ in context $\Gamma$, and maps $f,g_l,g_r,\alpha_l,\alpha_r$ constituting an equivalence from $A$ to $A'$ over $\Gamma$; and
+        \item $\gen{\Gamma_n\vdash e:\Id_A(a,a')}$ is freely generated by $\Gamma$ and $A$, as in $\gen{\Gamma_n\vdash A}$, and a section to the projection map $\Gamma.A.(p_A)^*A.\Id_A\to\Gamma.A$, giving the three terms $a,a'$, and $e$.
+    \end{enumerate}
+\end{defn}
+\begin{rem}
+    Our use of the phase "freely generated" is perhaps a bit misleading, as these are not all freely generated objects of the theory of contextual categories. Since terms of the theory correspond to sections, these objects must involve some relations. Calling these objects "freely generated" emphasizes their role in relation to their corresponding syntactic objects.
+\end{rem}
+
+We can now define the classes of maps that will make up the rest of the left semi-model structure on $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
 \begin{defn}
     Take $I$ and $J$ to be the following sets of maps:
     \begin{enumerate}
@@ -280,12 +285,12 @@ These will make up the class $\cW$ of our left semi-model structure. The remaini
     We now define the \textbf{trivial fibrations}, $\cT\cF$, as the right lifting class of $I$, the \textbf{cofibrations}, $\cC$, as the left lifting class of $\cT\cF$, the \textbf{fibrations}, $\cF$, as the right lifting class of $J$, and the \textbf{anodyne maps}, $\cA$, as the left lifting class of $\cF$.
 \end{defn}
 
-By the small object argument \cite{Quillen}, we get:
+By the small object argument, we get:
 \begin{prop}
     $(\cC,\cT\cF)$ and $(\cA,\cF)$ are both weak factorization systems.
 \end{prop}
 
-Unfolding the lifting properties of $\cT\cF$, we can see that a map $F\colon C\to D$ is a trivial fibration exactly if it strictly lifts types and terms, i.e. for any $\Gamma\in C$ and $C\in\Ty(F\Gamma)$, there is some term $\bar{A}\in\Ty(\Gamma)$ such that $F\bar{A}=A$, and similarly for terms. Since strict type and term lifting immediately implies their corresponding weak version, we get that trivial fibrations must be weak equivalences. Similarly, the lifting properties for fibrations can be seen as equivalence and equality lifting. Additionlly, we immediately get that every object is fibrant, since the generating anodyne maps have retracts given by the identity equivalence and reflexivity, respectively.
+Unfolding the lifting properties of $\cT\cF$, we can see that a map $F\colon C\to D$ is a trivial fibration exactly if it strictly lifts types and terms, i.e. for any $\Gamma\in C$ and $C\in\Ty(F\Gamma)$, there is some term $\bar{A}\in\Ty(\Gamma)$ such that $F\bar{A}=A$, and similarly for terms. Since strict type and term lifting immediately implies their corresponding weak version, we get that trivial fibrations must be weak equivalences. Similarly, the lifting properties for fibrations can be seen as equivalence and equality lifting. Additionally, we immediately get that every object is fibrant, since the generating anodyne maps have retracts given by the identity equivalence and reflexivity, respectively.
 
 It follows from the construction that a typical cofibration of contextual categories is an $I$-cell complex, i.e. it consists of freely adding types and terms to a theory without any judgmental equalities. Cofibrant contextual categories are then type theories which are freely generated (over the constructors $\Id,1,\Sigma,\Pi_{\ext}$) by a set of type and term formation rules with no (non-trivial) judgmental equalities. The anodyne maps, in turn, consist of freely adjoining types and terms to a theory along with equivalences and identities to a preexisting type or term.
 
@@ -295,7 +300,7 @@ These classes of maps satisfy the hypotheses of \ref{lem:semi-model struct}, pro
     The classes $\cW,\cC,\cF$ above form a left semi-model structure on the category $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$.
 \end{thm}
 \begin{sketch}
-    We show that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ satisfies the hypotheses of \ref{lem:semi-model struct}. As noted before, we know that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ is bicomplete, as a category of models of an essentially algebraic theory, and as we saw above, we have two weak factorization systems, $(\cC,\cT\cF)$ and $(\cA,\cF)$, constructed with the small objects argument. Showing that the class $\cW$ satisfies the right closure properties and that $\cT\cF=\cF\cap\cW$ are straightforward arguments, so the bulk of the work that is required is in showing that maps with cofibrant source are anodyne exactly when they are both cofibrations and weak equivalences.
+    We show that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$, along with the supplied classes of maps, satisfy the hypotheses of \ref{lem:semi-model struct}. As noted before, we know that $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ is bicomplete, as a category of models of an essentially algebraic theory, and as we saw above, we have two weak factorization systems, $(\cC,\cT\cF)$ and $(\cA,\cF)$, constructed with the small objects argument. Showing that the class $\cW$ satisfies the correct closure properties and that $\cT\cF=\cF\cap\cW$ are straightforward arguments, so the bulk of the work that is required is in showing that maps with cofibrant source are anodyne exactly when they are both cofibrations and weak equivalences.
 
     First off, the inclusion $\cA\subseteq\cC$ follows dually from the fact that $\cT\cF\subseteq\cF$, which is immediate from their construction.
 
@@ -342,9 +347,9 @@ These classes of maps satisfy the hypotheses of \ref{lem:semi-model struct}, pro
 
 \section{Conjecture}
 
-With our syntax given by contextual categories and semantics given by quasicategories, we finally have the background to start discussing the conjecture which is the primary motivation of this research. We saw previously that each contextual category has an underlying category with weak equivalences, giving us an inclusion $\CxlCat\to\weCat$. It is known that the categories $\weCat$ and $\qCat$ are DK-equivalent as categories with weak equivalences. We will call this equivalence $\Ho_\infty$ and note that it can be implemented in a number of ways (see \cite[$\S1.6$]{Barwick}), but, for concreteness, we can consider the following localization construction which takes a category with weak equivalences $(C,\cW)$, takes the pushout of the span
+With our syntax given by contextual categories and semantics given by quasicategories, we finally have the background to start discussing the conjecture which is the primary motivation of this research. We saw previously that each contextual category has an underlying category with weak equivalences, giving us an inclusion $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}\to\weCat$. It is known that the categories $\weCat$ and $\qCat$ are DK-equivalent as categories with weak equivalences. We will call this equivalence $\Ho_\infty$ and note that it can be implemented in a number of ways (see \cite[$\S1.6$]{Barwick}), but, for concreteness, we can consider the following localization construction which takes a category with weak equivalences $(C,\cW)$, takes the pushout of the span
 $$ \coprod_{w\in\cW}E[1]\leftarrow\coprod_{w\in\cW}\Delta^1\to NC $$
-in $\sSet$ ($NC$ is the nerve of $C$), and takes a fibrant replacement in the Joyal model structure. We can then define the map $\Cl_\infty$ as the following composite:
+in $\sSet$ ($NC$ is the nerve of $C$), and then takes a fibrant replacement in the Joyal model structure. We can then define the map $\Cl_\infty$ as the following composite:
 \[\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}\xrightarrow{\quad}\weCat\xrightarrow{\Ho_\infty}\qCat.\]
 \cite{Kapulkin} shows us that this functor is homotopical and valued in $\LCCC_\infty$.
 \begin{thm}\cite[Thm. 5.8]{Kapulkin}
@@ -374,11 +379,11 @@ Our goal then is to construct a new functor, equivalent to $\Cl_\infty$, using a
     The nerve of a category is given by the inclusion $\Delta\hookrightarrow\Cat$, which for a category $C$ tells us that $N(C)_n=\Cat([n],C)$ is the set of objects in $C$ for $n=0$, and composable $n$-chains of morphisms in $C$ for $n>0$.
 \end{ex}
 
-To get the desired functor from $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ to $\qCat$ then, all that is necessary is to find the "correct" simplicial object in $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ which induces a nerve functor that is valued in quasicategories and equivalent to $\Cl_\infty$. There is an "obvious" cosimplicial object $\T$ in $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ whose theories are freely generated, for each $n\in\N$, by closed types $A_i$, for each $i\in[n]$, and terms $x:A_i\vdash f_{i+1}(x):A_{i+1}$, for each $i\in[n-1]$,. The face maps $\delta_i\colon\T_{n-1}\to\T_n$ are given by sending $f_i$ to $f_{i+1}\circ f_i$, and the degeneracy maps $\sigma_i\colon\T_{n+1}\to\T_n$, are defined by sending $f_{i+1}$ to $\id_{A_i}$.
+To get the desired functor from $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ to $\qCat$ then, all that is necessary is to find the correct simplicial object in $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ which induces a nerve functor that is valued in quasicategories and equivalent to $\Cl_\infty$. There is an "obvious" cosimplicial object $\T$ in $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$ whose theories are freely generated, for each $n\in\N$, by closed types $A_i$, for each $i\in[n]$, and terms $x:A_i\vdash f_{i+1}(x):A_{i+1}$, for each $i\in[n-1]$,. The face maps $\delta_i\colon\T_{n-1}\to\T_n$ are given by sending $f_i$ to $f_{i+1}\circ f_i$, and the degeneracy maps $\sigma_i\colon\T_{n+1}\to\T_n$, are defined by sending $f_{i+1}$ to $\id_{A_i}$.
 
 The issue with this cosimplcial object is that it is in a sense too strict. To properly capture the structure of our type theories, we would expect the theory representing the 2-simplex, for example, to not just have a single map $x:A_0\vdash f_2(f_1(x)):A_2$, but rather there should be a distinct map, say $f_{02}$, connecting the types $A_0$ and $A_2$ and a term identifying these two maps, i.e. $x:A_0\vdash\alpha(x):\Id_{A_2}(f_{02}(x),f_2(f_1(x)))$. The "simplices" in $\T$ contain none of the homotopical information present in our type theories i.e. they do not have any identity terms, so mapping out of them into a theory $\bS$ would not capture any of the higher structure in $\bS$. What this means more concretely is that $\T$ is not Reedy cofibrant, and so we should not expect that the mapping space from $\T$ to a fibrant object $\bS$ (reminder that all theories are fibrant) would be a fibrant simplicial set in the Joyal model structure i.e. a quasicategory.
 
-This situation is analogous to that of the homotopy coherent nerve for simplicial categories (see \cite[Ch. 1]{Lurie} for more exposition), where the naive inclusion $\Delta\hookrightarrow\Cat\hookrightarrow\sCat$, does not produce a nerve functor that properly accounts for the homotopical data, i.e. the simplicial enrichment, on $\sCat$. The solution to this is then to consider "thickened" simplices which account for the homotopical structure and are a Reedy cofibrant replacement of the naive cosimplicial object. We wish to attempt something similar in our context, but to make sure that a Reedy cofibrant replacement exists, we need some sort of Reedy left semi-model structure on $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}^\Delta$. \note{talk just about CxlCat with id types?}
+This situation is analogous to that of the homotopy coherent nerve for simplicial categories (see \cite[Ch. 1]{Lurie} for more exposition), where the naive inclusion $\Delta\hookrightarrow\Cat\hookrightarrow\sCat$, does not produce a nerve functor that properly accounts for the homotopical data, i.e. the simplicial enrichment, on $\sCat$. The solution to this is then to consider "thickened" simplices which account for the homotopical structure and are a Reedy cofibrant replacement of the naive cosimplicial object. We wish to attempt something similar in our context, but to make sure that a Reedy cofibrant replacement exists, we need some sort of Reedy left semi-model structure on $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}^\Delta$.
 
 To do this, we first recall some of the basic definitions of Reedy theory.
 
@@ -405,7 +410,7 @@ A category of diagrams indexed by a Reedy category and valued in a model categor
     \end{enumerate}
 \end{defn}
 \begin{defn}
-    Let $\cR$ be a Reedy category, $\cM$ a model category (or more generally a category with a classes of (co)fibrations), and $f\colon X\to Y$ a map of diagrams in $\cM^\cR$.
+    Let $\cR$ be a Reedy category, $\cM$ a model category (or more generally a category with a class of (co)fibrations), and $f\colon X\to Y$ a map of diagrams in $\cM^\cR$.
     \begin{enumerate}
         \item The map $f$ is a \textbf{Reedy cofibration} if, for every object $\alpha\in\cR$, the \textbf{relative latching map}
         \[X_\alpha\amalg_{L_\alpha X}L_\alpha Y\to Y_\alpha\]
@@ -416,7 +421,7 @@ A category of diagrams indexed by a Reedy category and valued in a model categor
     \end{enumerate}
 \end{defn}
 
-While the standard Reedy model structure for diagrams valued in a model category is well understood, since we only have a left semi-model structure on $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$, we wish to construct an analogous Reedy left semi-model structure on $\cM^\cR$ when $\cM$ does not have a full model structure.
+While the standard Reedy model structure for diagrams valued in a model category is well understood, we only have a left semi-model structure on $\CxlCat_{\Id,1,\Sigma,\Pi_{\ext}}$, so we wish to construct an analogous Reedy left semi-model structure on $\cM^\cR$ when $\cM$ does not have a full model structure.
 
 \begin{thm}\label{thm:reedy left-semi model struct}
     Let $\cM$ be a category satisfying the hypotheses of \ref{lem:semi-model struct}, and $\cR$ a Reedy category. The category $\cM^\cR$ comes equipped with a left semi-model structure where weak equivalences are defined component-wise, and the (co)fibrations are the Reedy (co)fibrations.
